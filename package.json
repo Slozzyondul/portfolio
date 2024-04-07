@@ -1,0 +1,11 @@
+{
+    "name": "your-project-name",
+    "version": "1.0.0",
+    "description": "This is my first personal website portfolio build  using html and css only",
+    "main": "portfolio.html",  
+    "scripts": {
+      
+    },
+    "dependencies": {}  
+  }
+  
