@@ -2,29 +2,30 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  color: var(--color-default); /* Assuming this is defined elsewhere */
-  background-color: #cec2c2;
+  color: #333; /* Changed to a fixed color */
+  background-color: #f4f4f9; /* Softer background color */
 }
 
 header {
-  background-color: #333;
-  color: #fff; /* Improved contrast for white text */
-  padding: 1.5rem; /* Use rem for responsive padding */
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 1rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
   transition: all 0.5s;
-  z-index: 997;
 }
 
 header h1 {
   margin: 0;
-  font-size: 1.5rem; /* Use rem for responsive font size */
+  font-size: 1.5rem;
 }
 
 nav {
-  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f8f8f8;
 }
 
 nav ul {
@@ -35,44 +36,114 @@ nav ul {
 }
 
 nav li {
-  margin: 0 1rem; /* Use rem for responsive margin */
+  margin: 0 1rem;
 }
 
 nav a {
   text-decoration: none;
-  color: #333;
+  color: #fff;
+  font-weight: bold;
 }
 
-main {
+.header-social-links a {
+  color: #fff;
+  margin: 0 0.5rem;
+}
+
+.main {
   max-width: 800px;
   margin: 0 auto;
-  padding: 1.5rem; /* Use rem for responsive padding */
+  padding: 2rem 1.5rem;
 }
 
-section {
-  margin-bottom: 1.5rem; /* Use rem for responsive margin */
+.page-header {
+  background: #34495e;
+  color: #fff;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-top: 60px;
 }
 
-h2 {
-  margin: 0 0 1.5rem 0; /* Use rem for responsive margin */
-  font-size: 1.5rem; /* Use rem for responsive font size */
+.page-header h2 {
+  font-size: 2rem;
+}
+
+.page-header p {
+  font-size: 1.2rem;
+}
+
+.btn-available {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.about img {
+  border-radius: 0.5rem;
+}
+
+.about .content {
+  padding: 1rem;
+}
+
+.about h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.projects, .skills, .contact {
+  background: #fff;
+  padding: 2rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+}
+
+.projects ul, .skills ul, .contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.projects li, .skills li, .contact li {
+  margin: 0.5rem 0;
+}
+
+.projects a, .contact a {
+  text-decoration: none;
+  color: #3498db;
+  font-weight: bold;
 }
 
 footer {
-  background-color: #333;
+  background-color: #2c3e50;
   color: #fff;
-  padding: 1rem; /* Use rem for responsive padding */
+  padding: 1rem;
   text-align: center;
 }
 
-/* Media Queries for Additional Breakpoints (optional) */
-
-@media only screen and (max-width: 480px) {
-  /* Styles for even smaller screens */
+@media (max-width: 768px) {
   header h1 {
     font-size: 1.2rem;
   }
-  h2 {
+  .page-header h2 {
+    font-size: 1.5rem;
+  }
+  .page-header p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1rem;
+  }
+  .page-header h2 {
     font-size: 1.2rem;
+  }
+  .page-header p {
+    font-size: 0.9rem;
   }
 }
