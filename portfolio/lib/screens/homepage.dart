@@ -12,6 +12,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height* 0.09,
         shape: Border.all(width: 2),
         backgroundColor: Colors.grey,
         elevation: 10,
@@ -22,8 +23,8 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Image.asset(
                 alignment: Alignment.center,
                 'assets/images/logo.JPG',
-                height: MediaQuery.of(context).size.height * 0.05,
-                width: MediaQuery.of(context).size.width * 0.15,
+                height: MediaQuery.of(context).size.height * 0.08,
+                width: MediaQuery.of(context).size.width * 0.25,
               ),
             ),
             SizedBox(width: MediaQuery.of(context).size.width * 0.15),
@@ -40,6 +41,21 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ],
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [],
         ),
       ),
     );
