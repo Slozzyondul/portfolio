@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/methods/contact_info.dart';
 import 'package:portfolio/methods/service_card.dart';
@@ -19,6 +20,7 @@ class _AboutScreenState extends State<AboutScreen> {
         padding: const EdgeInsets.all(16.0),
         child: isMobile
             ? Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Sidebar Profile Section
                   Container(
@@ -85,7 +87,7 @@ class _AboutScreenState extends State<AboutScreen> {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            'A passionate Flutter developer with strong expertise in cross-platform apps... ',
+                            'A passionate Flutter developer with strong expertise in cross-platform applications ',
                             style: TextStyle(color: Colors.grey),
                           ),
                           SizedBox(height: 20),
@@ -120,6 +122,99 @@ class _AboutScreenState extends State<AboutScreen> {
                                       'High-performance backend services designed for scalability.'),
                             ],
                           ),
+                          SizedBox(height: 20),
+                          Text(
+                            "Skills",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Scrollbar(
+                              scrollbarOrientation: ScrollbarOrientation.bottom,
+                              thumbVisibility: true,
+                              trackVisibility: true,
+                              thickness: 6,
+                              radius: Radius.circular(10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child:
+                                        Image.asset('assets/images/dart.png'),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: Image.asset(
+                                        'assets/images/flutter.png'),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: Image.asset(
+                                        'assets/images/python.jpeg'),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child:
+                                        Image.asset('assets/images/linux.jpeg'),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child:
+                                        Image.asset('assets/images/sql.jpeg'),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: Image.asset('assets/images/git.png'),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: Image.asset(
+                                        'assets/images/javascript.png'),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: Image.asset('assets/images/go.png'),
+                                  ),
+                                  SizedBox(width: 20),
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),

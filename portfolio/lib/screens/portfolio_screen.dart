@@ -49,7 +49,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   Widget _buildTab(String title, int index) {
     return GestureDetector(
       onTap: () {
-        setState(() {
+        setState(() {  
           _selectedIndex = index;
         });
       },
