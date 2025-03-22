@@ -4,18 +4,19 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
 const RESOURCES = {"favicon.png": "5dcef449791fa27946b3d35ad8803796",
-"flutter_bootstrap.js": "490ea2332b4be948492e0453d7d046c9",
+"flutter_bootstrap.js": "66b2d73ff2bc48ce5ca54d6ec8126e95",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "assets/shaders/ink_sparkle.frag": "ecc85a2e95f5e9f53123dcaf8cb9b6ce",
+"assets/assets/images/solo.png": "bd9889994329a54ea43c8ca63ed36967",
 "assets/assets/images/logo.JPG": "aae19e0a4a4bf2d6284c4b3f7b8e604c",
-"assets/AssetManifest.json": "ba662ea7c116a605367b224b9f22c332",
+"assets/AssetManifest.json": "9f98619985ea382574f588d0c7462ae0",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
-"assets/AssetManifest.bin": "cf4fae2d346ae78dcb3de1dbc4b35855",
-"assets/fonts/MaterialIcons-Regular.otf": "c0ad29d56cfe3890223c02da3c6e0448",
-"assets/AssetManifest.bin.json": "cba6b2e142973715506dfa778515db8a",
+"assets/AssetManifest.bin": "e1f8a3592d8df9f1110f902ecdfbfece",
+"assets/fonts/MaterialIcons-Regular.otf": "94edac914887a5105c29e3ff88d41948",
+"assets/AssetManifest.bin.json": "6393dddbe18894f73701b7a7e9d985e2",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "33b7d9392238c04c131b6ce224e13711",
 "assets/NOTICES": "9f6ab3ccb38716545120bd1431d1e2f5",
 "manifest.json": "d40c47d1c161f94dbcb13094d37f1f55",
@@ -34,7 +35,7 @@ const RESOURCES = {"favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "version.json": "009c9e65172e010890f7f65fde438006",
 "index.html": "80b7f3c2a7bb29c643595523dbc0fc2e",
 "/": "80b7f3c2a7bb29c643595523dbc0fc2e",
-"main.dart.js": "fb020a9eb9c99e2c91cf287e8b5901c3",
+"main.dart.js": "72c9226e8b311d97d93623ab1d1216f4",
 "flutter.js": "76f08d47ff9f5715220992f993002504"};
 // The application shell files that are downloaded before a service worker can
 // start.
