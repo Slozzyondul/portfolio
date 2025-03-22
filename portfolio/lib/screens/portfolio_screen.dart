@@ -1,241 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/screens/contact_info.dart';
-import 'package:portfolio/screens/service_card.dart';
+import 'package:portfolio/methods/contact_info.dart';
+import 'package:portfolio/methods/service_card.dart';
+import 'package:portfolio/screens/about_screen.dart';
+import 'package:portfolio/screens/blog_screen.dart';
+import 'package:portfolio/screens/contact_screen.dart';
+import 'package:portfolio/screens/projects_screen.dart';
+import 'package:portfolio/screens/resume_screen.dart';
 
-class PortfolioScreen extends StatelessWidget {
+class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
 
   @override
+  State<PortfolioScreen> createState() => _PortfolioScreenState();
+}
+
+class _PortfolioScreenState extends State<PortfolioScreen> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _screens = [
+    AboutScreen(),
+    ResumeScreen(),
+    ProjectsScreen(),
+    BlogScreen(),
+    ContactScreen(),
+    
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    final bool isMobile =
-        MediaQuery.of(context).size.width < 600; 
+    
 
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: isMobile
-            ? Column(
-                children: [
-                  // Sidebar Profile Section
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[900],
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundImage: AssetImage('assets/images/logo.JPG'),
-                        ),
-                        SizedBox(height: 12),
-                        Text(
-                          'Solomon Ondula Omusinde',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'Flutter Developer',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        SizedBox(height: 16),
-                        // Contact Information
-                        ContactInfo(
-                            icon: Icons.email, text: 'solomonondula@gmail.com'),
-                        ContactInfo(icon: Icons.phone, text: '+254 792352745'),
-                        ContactInfo(
-                            icon: Icons.location_on, text: 'Nairobi, Kenya'),
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.linked_camera, color: Colors.white),
-                            SizedBox(width: 10),
-                            Icon(Icons.g_translate, color: Colors.white),
-                            SizedBox(width: 10),
-                            Icon(Icons.alternate_email, color: Colors.white),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  // Main Content
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'About Me',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'A passionate Flutter developer with strong expertise in cross-platform apps... ',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            "What I'm Doing",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Wrap(
-                            spacing: 10,
-                            runSpacing: 10,
-                            children: [
-                              ServiceCard(
-                                  title: 'Mobile Apps',
-                                  subtitle:
-                                      'Professional development of applications for Android and iOS.'),
-                              ServiceCard(
-                                  title: 'Web Development',
-                                  subtitle:
-                                      'High-quality development of sites at the professional level.'),
-                              ServiceCard(
-                                  title: 'UI/UX Design',
-                                  subtitle:
-                                      'The most modern and high-quality design made at a professional level.'),
-                              ServiceCard(
-                                  title: 'Backend Development',
-                                  subtitle:
-                                      'High-performance backend services designed for scalability.'),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            : Row(
-                children: [
-                  // Sidebar Profile Section
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[900],
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundImage:
-                                AssetImage('assets/images/logo.JPG'),
-                          ),
-                          SizedBox(height: 12),
-                          Text(
-                            'Solomon Ondula Omusinde',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          Text(
-                            'Flutter Developer',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          SizedBox(height: 16),
-                          // Contact Information
-                          ContactInfo(
-                              icon: Icons.email,
-                              text: 'solomonondula@gmail.com'),
-                          ContactInfo(
-                              icon: Icons.phone, text: '+254 792352745'),
-                          ContactInfo(
-                              icon: Icons.location_on, text: 'Nairobi, Kenya'),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.linked_camera, color: Colors.white),
-                              SizedBox(width: 10),
-                              Icon(Icons.g_translate, color: Colors.white),
-                              SizedBox(width: 10),
-                              Icon(Icons.alternate_email, color: Colors.white),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 16),
-                  // Main Content
-                  Expanded(
-                    flex: 5,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'About Me',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'A passionate Flutter developer with strong expertise in cross-platform apps... ',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        SizedBox(height: 20),
-                        Text(
-                          "What I'm Doing",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Wrap(
-                          spacing: 10,
-                          runSpacing: 10,
-                          children: [
-                            ServiceCard(
-                                title: 'Mobile Apps',
-                                subtitle:
-                                    'Professional development of applications for Android and iOS.'),
-                            ServiceCard(
-                                title: 'Web Development',
-                                subtitle:
-                                    'High-quality development of sites at the professional level.'),
-                            ServiceCard(
-                                title: 'UI/UX Design',
-                                subtitle:
-                                    'The most modern and high-quality design made at a professional level.'),
-                            ServiceCard(
-                                title: 'Backend Development',
-                                subtitle:
-                                    'High-performance backend services designed for scalability.'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF1E1E1E),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildTab("About", 0),
+            _buildTab("Resume", 1),
+            _buildTab("Projects", 2),
+            _buildTab("Blog", 3),
+            _buildTab("Contact", 4),
+          ],
+        ),
+      ),
+      
+      body: _screens[_selectedIndex],
+    );
+  }
+  Widget _buildTab(String title, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Flexible(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: _selectedIndex == index ? Colors.amber : Colors.white70,
+              fontWeight:
+                  _selectedIndex == index ? FontWeight.bold : FontWeight.normal,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+          
+        ),
       ),
     );
   }
