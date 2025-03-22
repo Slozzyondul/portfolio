@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:portfolio/screens/homepage.dart';
+import 'package:portfolio/screens/splash_screen.dart';
 
 void main() {
   // Ensure Flutter binding is initialized
@@ -21,10 +21,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Solomon Ondula Portfolio',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey
-      ),
-      home: MyHomePage(),
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
+      home: SplashScreenWrapper(),
     );
   }
 }
