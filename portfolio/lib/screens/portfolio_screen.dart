@@ -63,7 +63,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               fontWeight:
                   _selectedIndex == index ? FontWeight.bold : FontWeight.normal,
             ),
-            overflow: TextOverflow.visible,
+            overflow: TextOverflow.fade,
           ),
         ),
       ),
