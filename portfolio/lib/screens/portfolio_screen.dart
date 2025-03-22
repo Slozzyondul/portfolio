@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/methods/contact_info.dart';
-import 'package:portfolio/methods/service_card.dart';
 import 'package:portfolio/screens/about_screen.dart';
 import 'package:portfolio/screens/blog_screen.dart';
 import 'package:portfolio/screens/contact_screen.dart';
@@ -23,32 +21,31 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
     ProjectsScreen(),
     BlogScreen(),
     ContactScreen(),
-    
   ];
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.07,
         backgroundColor: Color(0xFF1E1E1E),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildTab("About", 0),
-            _buildTab("Resume", 1),
-            _buildTab("Projects", 2),
-            _buildTab("Blog", 3),
-            _buildTab("Contact", 4),
+            Expanded(child: _buildTab("About", 0)),
+            Expanded(child: _buildTab("Resume", 1)),
+            Expanded(child: _buildTab("Projects", 2)),
+            Expanded(child: _buildTab("Blog", 3)),
+            Expanded(child: _buildTab("Contact", 4)),
           ],
         ),
+        elevation: 10,
       ),
-      
       body: _screens[_selectedIndex],
     );
   }
+
   Widget _buildTab(String title, int index) {
     return GestureDetector(
       onTap: () {
@@ -58,7 +55,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Flexible(
+        child: Center(
           child: Text(
             title,
             style: TextStyle(
@@ -66,9 +63,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               fontWeight:
                   _selectedIndex == index ? FontWeight.bold : FontWeight.normal,
             ),
-            overflow: TextOverflow.ellipsis,
+            overflow: TextOverflow.visible,
           ),
-          
         ),
       ),
     );

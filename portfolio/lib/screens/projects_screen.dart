@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProjectsScreen extends StatefulWidget {
-  ProjectsScreen({Key? key}) : super(key: key);
+  const ProjectsScreen({super.key});
 
   @override
   _ProjectsScreenState createState() => _ProjectsScreenState();

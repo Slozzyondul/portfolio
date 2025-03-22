@@ -3,7 +3,7 @@ import 'package:portfolio/methods/contact_info.dart';
 import 'package:portfolio/methods/service_card.dart';
 
 class AboutScreen extends StatefulWidget {
-  AboutScreen({Key? key}) : super(key: key);
+  const AboutScreen({super.key});
 
   @override
   _AboutScreenState createState() => _AboutScreenState();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ResumeScreen extends StatefulWidget {
-  ResumeScreen({Key? key}) : super(key: key);
+  const ResumeScreen({super.key});
 
   @override
   _ResumeScreenState createState() => _ResumeScreenState();
