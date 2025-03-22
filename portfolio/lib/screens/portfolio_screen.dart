@@ -3,6 +3,8 @@ import 'package:portfolio/screens/contact_info.dart';
 import 'package:portfolio/screens/service_card.dart';
 
 class PortfolioScreen extends StatelessWidget {
+  const PortfolioScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final bool isMobile =
