@@ -10,6 +10,17 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
+  final ScrollController _verticalScrollController = ScrollController();
+  final ScrollController _horizontalScrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _verticalScrollController.dispose();
+    _horizontalScrollController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool isMobile = MediaQuery.of(context).size.width < 600;
@@ -73,6 +84,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   // Main Content
                   Expanded(
                     child: SingleChildScrollView(
+                      controller: _verticalScrollController,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -130,8 +142,10 @@ class _AboutScreenState extends State<AboutScreen> {
                                 fontWeight: FontWeight.bold),
                           ),
                           SingleChildScrollView(
+                            controller: _horizontalScrollController,
                             scrollDirection: Axis.horizontal,
                             child: Scrollbar(
+                              controller: _horizontalScrollController,
                               scrollbarOrientation: ScrollbarOrientation.bottom,
                               thumbVisibility: true,
                               trackVisibility: true,
@@ -337,55 +351,64 @@ class _AboutScreenState extends State<AboutScreen> {
                               fontWeight: FontWeight.bold),
                         ),
                         SingleChildScrollView(
+                          controller: _horizontalScrollController,
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.15,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 child: Image.asset('assets/images/dart.png'),
                               ),
                               SizedBox(width: 20),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.15,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 child: Image.asset('assets/images/flutter.png'),
                               ),
                               SizedBox(width: 20),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.15,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 child: Image.asset('assets/images/python.jpeg'),
                               ),
                               SizedBox(width: 20),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.15,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 child: Image.asset('assets/images/linux.jpeg'),
                               ),
                               SizedBox(width: 20),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.15,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 child: Image.asset('assets/images/sql.jpeg'),
                               ),
                               SizedBox(width: 20),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.15,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 child: Image.asset('assets/images/git.png'),
                               ),
                               SizedBox(width: 20),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.15,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 child:
                                     Image.asset('assets/images/javascript.png'),
                               ),
                               SizedBox(width: 20),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.15,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 child: Image.asset('assets/images/go.png'),
                               ),
