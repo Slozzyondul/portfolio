@@ -12,7 +12,7 @@ This portfolio showcases my work as a Flutter developer, highlighting my project
 - **Blog**: A space where I share insights, tutorials, and experiences related to Flutter and software development.
 - **Contact Page**: Allows visitors to reach out to me directly via a contact form.
 - **Dark Mode Support**: A sleek dark-themed UI for better aesthetics and user experience.
-- **Interactive Map**: Displays my location (Nairobi, Kenya) using Google Maps integration.
+
 
 ## 🛠 Tech Stack
 - **Frontend:** Flutter Web
