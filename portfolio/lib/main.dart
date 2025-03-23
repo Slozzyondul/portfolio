@@ -5,6 +5,7 @@ import 'package:portfolio/screens/splash_screen.dart';
 void main() {
   // Ensure Flutter binding is initialized
   WidgetsFlutterBinding.ensureInitialized();
+  
 
   // Set system UI mode
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
