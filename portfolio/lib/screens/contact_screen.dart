@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+//import 'package:webview_flutter/webview_flutter.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
@@ -15,15 +15,15 @@ class _ContactScreenState extends State<ContactScreen> {
   final TextEditingController subjectController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
 
-  late final WebViewController webViewController;
+  //late final WebViewController webViewController;
 
-  @override
-  void initState() {
-    super.initState();
-    webViewController = WebViewController()
-      ..loadRequest(Uri.parse(
-          'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.251031229525!2d36.8164896!3d-1.2863898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10b70baf66e1%3A0x4c2e0d1a3f59a7ff!2sNairobi!5e0!3m2!1sen!2ske!4v1699986123456'));
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   webViewController = WebViewController()
+  //     ..loadRequest(Uri.parse(
+  //         'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.251031229525!2d36.8164896!3d-1.2863898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10b70baf66e1%3A0x4c2e0d1a3f59a7ff!2sNairobi!5e0!3m2!1sen!2ske!4v1699986123456'));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +35,14 @@ class _ContactScreenState extends State<ContactScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Embedded Google Map (Nairobi)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: SizedBox(
-                height: 250,
-                child: WebViewWidget(controller: webViewController),
-              ),
-            ),
-            const SizedBox(height: 20),
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(16),
+            //   child: SizedBox(
+            //     height: 250,
+            //     child: WebViewWidget(controller: webViewController),
+            //   ),
+            // ),
+            // const SizedBox(height: 20),
 
             // Contact Form
             const Text(
