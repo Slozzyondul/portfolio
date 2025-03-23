@@ -43,7 +43,7 @@ class BlogDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget est eu risus venenatis facilisis ut et lorem. Proin luctus pharetra elit, nec sodales turpis fermentum et. Duis consectetur augue vel volutpat elementum.',
+              'More content to be updated soon',
               style: TextStyle(color: Colors.white70, fontSize: 14),
             ),
           ],
