@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/methods/contact_info.dart';
 import 'package:portfolio/methods/service_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -159,8 +160,24 @@ class _AboutScreenState extends State<AboutScreen> {
                                         0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.15,
-                                    child:
-                                        Image.asset('assets/images/dart.png'),
+                                    child: GestureDetector(
+                                        onTap: () async {
+                                          final Uri url = Uri.parse(
+                                              'https://dart.dev'); // Official Dart website
+                                          if (await canLaunchUrl(url)) {
+                                            await launchUrl(url);
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                    'Could not launch $url'),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: Image.asset(
+                                            'assets/images/dart.png')),
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(
@@ -168,8 +185,25 @@ class _AboutScreenState extends State<AboutScreen> {
                                         0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.15,
-                                    child: Image.asset(
-                                        'assets/images/flutter.png'),
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://flutter.dev/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Image.asset(
+                                          'assets/images/flutter.png'),
+                                    ),
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(
@@ -177,8 +211,25 @@ class _AboutScreenState extends State<AboutScreen> {
                                         0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.15,
-                                    child: Image.asset(
-                                        'assets/images/python.jpeg'),
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url = Uri.parse(
+                                            'https://www.python.org/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Image.asset(
+                                          'assets/images/python.jpeg'),
+                                    ),
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(
@@ -186,8 +237,26 @@ class _AboutScreenState extends State<AboutScreen> {
                                         0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.15,
-                                    child:
-                                        Image.asset('assets/images/linux.jpeg'),
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://archlinux.org/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Image.asset(
+                                        'assets/images/linux.jpeg',
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(
@@ -195,8 +264,25 @@ class _AboutScreenState extends State<AboutScreen> {
                                         0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.15,
-                                    child:
-                                        Image.asset('assets/images/sql.jpeg'),
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://mariadb.org/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child:
+                                          Image.asset('assets/images/sql.jpeg'),
+                                    ),
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(
@@ -204,7 +290,25 @@ class _AboutScreenState extends State<AboutScreen> {
                                         0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.15,
-                                    child: Image.asset('assets/images/git.png'),
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://git-scm.com/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child:
+                                          Image.asset('assets/images/git.png'),
+                                    ),
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(
@@ -212,8 +316,25 @@ class _AboutScreenState extends State<AboutScreen> {
                                         0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.15,
-                                    child: Image.asset(
-                                        'assets/images/javascript.png'),
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url = Uri.parse(
+                                            'https://www.javascript.com/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Image.asset(
+                                          'assets/images/javascript.png'),
+                                    ),
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(
@@ -221,7 +342,25 @@ class _AboutScreenState extends State<AboutScreen> {
                                         0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.15,
-                                    child: Image.asset('assets/images/go.png'),
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://go.dev/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child:
+                                          Image.asset('assets/images/go.png'),
+                                    ),
                                   ),
                                   SizedBox(width: 20),
                                 ],
