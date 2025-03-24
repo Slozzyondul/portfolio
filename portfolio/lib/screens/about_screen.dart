@@ -481,80 +481,239 @@ class _AboutScreenState extends State<AboutScreen> {
                                     'High-performance backend services designed for scalability.'),
                           ],
                         ),
-                        SizedBox(height: 30),
-                        Text(
-                          "Skills",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SingleChildScrollView(
-                          controller: _horizontalScrollController,
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                child: Image.asset('assets/images/dart.png'),
-                              ),
-                              SizedBox(width: 20),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                child: Image.asset('assets/images/flutter.png'),
-                              ),
-                              SizedBox(width: 20),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                child: Image.asset('assets/images/python.jpeg'),
-                              ),
-                              SizedBox(width: 20),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                child: Image.asset('assets/images/linux.jpeg'),
-                              ),
-                              SizedBox(width: 20),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                child: Image.asset('assets/images/sql.jpeg'),
-                              ),
-                              SizedBox(width: 20),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                child: Image.asset('assets/images/git.png'),
-                              ),
-                              SizedBox(width: 20),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                child:
-                                    Image.asset('assets/images/javascript.png'),
-                              ),
-                              SizedBox(width: 20),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                child: Image.asset('assets/images/go.png'),
-                              ),
-                              SizedBox(width: 20),
-                            ],
+                        SizedBox(height: 20),
+                          Text(
+                            "Skills",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
-                        ),
+                          SingleChildScrollView(
+                            controller: _horizontalScrollController,
+                            scrollDirection: Axis.horizontal,
+                            child: Scrollbar(
+                              controller: _horizontalScrollController,
+                              scrollbarOrientation: ScrollbarOrientation.bottom,
+                              thumbVisibility: true,
+                              trackVisibility: true,
+                              thickness: 6,
+                              radius: Radius.circular(10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: GestureDetector(
+                                        onTap: () async {
+                                          final Uri url = Uri.parse(
+                                              'https://dart.dev'); // Official Dart website
+                                          if (await canLaunchUrl(url)) {
+                                            await launchUrl(url);
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                    'Could not launch $url'),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: Image.asset(
+                                            'assets/images/dart.png')),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://flutter.dev/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Image.asset(
+                                          'assets/images/flutter.png'),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url = Uri.parse(
+                                            'https://www.python.org/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Image.asset(
+                                          'assets/images/python.jpeg'),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://archlinux.org/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Image.asset(
+                                        'assets/images/linux.jpeg',
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://mariadb.org/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child:
+                                          Image.asset('assets/images/sql.jpeg'),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://git-scm.com/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child:
+                                          Image.asset('assets/images/git.png'),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url = Uri.parse(
+                                            'https://www.javascript.com/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Image.asset(
+                                          'assets/images/javascript.png'),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        final Uri url =
+                                            Uri.parse('https://go.dev/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Could not launch $url'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child:
+                                          Image.asset('assets/images/go.png'),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                ],
+                              ),
+                            ),
+                          )
                       ],
                     ),
                   ),
