@@ -60,13 +60,27 @@ class _AboutScreenState extends State<AboutScreen> {
                           'Flutter Developer',
                           style: TextStyle(color: Colors.grey),
                         ),
-                        SizedBox(height: 16),
+                        SizedBox(height: 20),
                         // Contact Information
                         ContactInfo(
                             icon: Icons.email, text: 'solomonondula@gmail.com'),
                         ContactInfo(icon: Icons.phone, text: '+254 792352745'),
                         ContactInfo(
                             icon: Icons.location_on, text: 'Nairobi, Kenya'),
+                        SizedBox(height: 20),
+                        GestureDetector(
+                          onTap: () async {
+                            final url = Uri.parse(
+                                'https://www.linkedin.com/in/solomon-ondula-4993471a7/');
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(url);
+                            } else {
+                              throw 'Could not launch $url';
+                            }
+                          },
+                          child: ContactInfo(
+                              icon: Icons.link, text: "LinkedIn Profile"),
+                        ),
                         SizedBox(height: 20),
                       ],
                     ),
@@ -404,6 +418,19 @@ class _AboutScreenState extends State<AboutScreen> {
                               icon: Icons.phone, text: '+254 792352745'),
                           ContactInfo(
                               icon: Icons.location_on, text: 'Nairobi, Kenya'),
+                          GestureDetector(
+                            onTap: () async {
+                              final url = Uri.parse(
+                                  'https://www.linkedin.com/in/solomon-ondula-4993471a7/');
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            },
+                            child: ContactInfo(
+                                icon: Icons.link, text: "LinkedIn Profile"),
+                          ),
                         ],
                       ),
                     ),
