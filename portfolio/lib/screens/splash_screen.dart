@@ -19,7 +19,9 @@ class _SplashScreenWrapperState extends State<SplashScreenWrapper> {
 
   Future<void> _loadData() async {
     // Simulate some loading time
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(
+      const Duration(seconds: 3),
+    );
 
     // After loading data, update the state to switch to the HomeScreen
     setState(() {
