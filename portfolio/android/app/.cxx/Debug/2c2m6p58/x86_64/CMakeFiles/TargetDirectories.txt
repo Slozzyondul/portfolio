@@ -1,0 +1,2 @@
+/home/solo/Documents/deploys/portfolio/portfolio/android/app/.cxx/Debug/2c2m6p58/x86_64/CMakeFiles/edit_cache.dir
+/home/solo/Documents/deploys/portfolio/portfolio/android/app/.cxx/Debug/2c2m6p58/x86_64/CMakeFiles/rebuild_cache.dir

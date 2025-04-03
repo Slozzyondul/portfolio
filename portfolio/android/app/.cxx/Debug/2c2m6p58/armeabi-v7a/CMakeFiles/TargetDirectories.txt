@@ -1,0 +1,2 @@
+/home/solo/Documents/deploys/portfolio/portfolio/android/app/.cxx/Debug/2c2m6p58/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/solo/Documents/deploys/portfolio/portfolio/android/app/.cxx/Debug/2c2m6p58/armeabi-v7a/CMakeFiles/rebuild_cache.dir
