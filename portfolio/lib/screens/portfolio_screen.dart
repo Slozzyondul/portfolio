@@ -29,16 +29,23 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       appBar: AppBar(
         toolbarHeight: MediaQuery.of(context).size.height * 0.07,
         backgroundColor: Color(0xFF1E1E1E),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(child: _buildTab("About", 0)),
-            Expanded(child: _buildTab("Resume", 1)),
-            Expanded(child: _buildTab("Projects", 2)),
-            Expanded(child: _buildTab("Blog", 3)),
-            Expanded(child: _buildTab("Contact", 4)),
-          ],
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildTab("About", 0),
+              SizedBox(width: 2),
+              _buildTab("Resume", 1),
+              SizedBox(width: 2),
+              _buildTab("Projects", 2),
+              SizedBox(width: 2),
+              _buildTab("Blog", 3),
+              SizedBox(width: 2),
+              _buildTab("Contact", 4),
+            ],
+          ),
         ),
         elevation: 10,
       ),
@@ -49,7 +56,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   Widget _buildTab(String title, int index) {
     return GestureDetector(
       onTap: () {
-        setState(() {  
+        setState(() {
           _selectedIndex = index;
         });
       },

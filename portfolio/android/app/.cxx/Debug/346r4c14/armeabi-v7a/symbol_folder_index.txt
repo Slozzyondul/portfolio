@@ -1,0 +1,1 @@
+/home/solo/Documents/projects/deploys/portfolio/portfolio/build/app/intermediates/cxx/Debug/346r4c14/obj/armeabi-v7a
