@@ -26,6 +26,12 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
       'url': 'https://slozzyondul.github.io/music-app/',
       'image': 'assets/images/music_app.jpeg'
     },
+
+    {
+      'title': 'My Pocket Wallet',
+      'url': 'https://slozzyondul.github.io/wallet/',
+      'image': 'assets/images/wallet.jpeg'
+    },
   ];
 
   void _launchURL(String url) async {
