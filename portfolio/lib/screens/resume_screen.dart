@@ -75,8 +75,9 @@ class _ResumeScreenState extends State<ResumeScreen>
   Widget _buildMobileLayout(ThemeData theme) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _buildHeader(theme),
+          _buildMobileHeader(theme),
           const SizedBox(height: 24),
           _buildExperienceSection(theme),
           const SizedBox(height: 24),
@@ -169,6 +170,65 @@ class _ResumeScreenState extends State<ResumeScreen>
             style: theme.textTheme.bodyLarge?.copyWith(
               height: 1.6,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMobileHeader(ThemeData theme) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.2),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Resume',
+            style: theme.textTheme.displaySmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Solomon Ondula Omusinde',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.primary,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Flutter Developer',
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: theme.colorScheme.secondary,
+              letterSpacing: 1.5,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Passionate Flutter developer with expertise in cross-platform mobile and web development. Experienced in building scalable applications with modern development practices.',
+            style: theme.textTheme.bodyLarge?.copyWith(
+              height: 1.6,
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

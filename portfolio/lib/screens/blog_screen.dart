@@ -129,69 +129,79 @@ class _BlogScreenState extends State<BlogScreen> with TickerProviderStateMixin {
     return Scaffold(
       body: FadeTransition(
         opacity: _fadeAnimation,
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
-              Text(
-                'Blog & Articles',
-                style: theme.textTheme.displaySmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Thoughts, tutorials, and insights about Flutter development',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
-                ),
-              ),
-              const SizedBox(height: 32),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isMobile = constraints.maxWidth < 768;
+            return Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: isMobile
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
+                children: [
+                  // Header
+                  Text(
+                    'Blog & Articles',
+                    style: theme.textTheme.displaySmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: isMobile ? TextAlign.center : TextAlign.left,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Thoughts, tutorials, and insights about Flutter development',
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onSurface.withOpacity(0.7),
+                    ),
+                    textAlign: isMobile ? TextAlign.center : TextAlign.left,
+                  ),
+                  const SizedBox(height: 32),
 
-              // Blog Posts Grid
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    int crossAxisCount = constraints.maxWidth > 1200
-                        ? 3
-                        : constraints.maxWidth > 768
-                            ? 2
-                            : 1;
+                  // Blog Posts Grid
+                  Expanded(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        int crossAxisCount = constraints.maxWidth > 1200
+                            ? 3
+                            : constraints.maxWidth > 768
+                                ? 2
+                                : 1;
 
-                    return GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        crossAxisSpacing: 24,
-                        mainAxisSpacing: 24,
-                        childAspectRatio: 0.8,
-                      ),
-                      itemCount: blogPosts.length,
-                      itemBuilder: (context, index) {
-                        return AnimatedBuilder(
-                          animation: _itemAnimations[index],
-                          builder: (context, child) {
-                            return Transform.scale(
-                              scale: _itemAnimations[index].value,
-                              child: BlogCard(
-                                title: blogPosts[index]['title']!,
-                                excerpt: blogPosts[index]['excerpt']!,
-                                imageUrl: blogPosts[index]['imageUrl']!,
-                                date: blogPosts[index]['date']!,
-                                readTime: blogPosts[index]['readTime']!,
-                                onTap: () => _onBlogTap(index),
-                              ),
+                        return GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: 24,
+                            mainAxisSpacing: 24,
+                            childAspectRatio: 0.8,
+                          ),
+                          itemCount: blogPosts.length,
+                          itemBuilder: (context, index) {
+                            return AnimatedBuilder(
+                              animation: _itemAnimations[index],
+                              builder: (context, child) {
+                                return Transform.scale(
+                                  scale: _itemAnimations[index].value,
+                                  child: BlogCard(
+                                    title: blogPosts[index]['title']!,
+                                    excerpt: blogPosts[index]['excerpt']!,
+                                    imageUrl: blogPosts[index]['imageUrl']!,
+                                    date: blogPosts[index]['date']!,
+                                    readTime: blogPosts[index]['readTime']!,
+                                    onTap: () => _onBlogTap(index),
+                                  ),
+                                );
+                              },
                             );
                           },
                         );
                       },
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

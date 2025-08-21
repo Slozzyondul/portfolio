@@ -105,9 +105,10 @@ class _ContactScreenState extends State<ContactScreen>
 
   Widget _buildMobileLayout(ThemeData theme) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         // Header
-        _buildHeader(theme),
+        _buildMobileHeader(theme),
         const SizedBox(height: 24),
 
         // Contact Info
@@ -164,6 +165,29 @@ class _ContactScreenState extends State<ContactScreen>
           style: theme.textTheme.bodyLarge?.copyWith(
             color: theme.colorScheme.onSurface.withOpacity(0.7),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMobileHeader(ThemeData theme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          'Get In Touch',
+          style: theme.textTheme.displaySmall?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Let\'s discuss your next project or just say hello!',
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: theme.colorScheme.onSurface.withOpacity(0.7),
+          ),
+          textAlign: TextAlign.center,
         ),
       ],
     );

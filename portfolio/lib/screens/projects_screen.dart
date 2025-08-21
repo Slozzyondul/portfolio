@@ -137,7 +137,9 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           return Padding(
             padding: EdgeInsets.all(screenWidth > 768 ? 24.0 : 16.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: screenWidth > 768
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.center,
               children: [
                 // Header
                 Text(
@@ -145,6 +147,8 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                   style: theme.textTheme.displaySmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign:
+                      screenWidth > 768 ? TextAlign.left : TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -152,6 +156,8 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                   style: theme.textTheme.bodyLarge?.copyWith(
                     color: theme.colorScheme.onSurface.withOpacity(0.7),
                   ),
+                  textAlign:
+                      screenWidth > 768 ? TextAlign.left : TextAlign.center,
                 ),
                 const SizedBox(height: 32),
 
