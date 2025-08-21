@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:portfolio/providers/theme_provider.dart';
 
 class ServiceCard extends StatefulWidget {
   final String title;
@@ -71,25 +73,42 @@ class _ServiceCardState extends State<ServiceCard>
               width: 200,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surface.withOpacity(0.8),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: Provider.of<ThemeProvider>(context, listen: false)
+                          .isDarkMode
+                      ? [
+                          theme.colorScheme.surface.withOpacity(0.9),
+                          theme.colorScheme.surface.withOpacity(0.85),
+                        ]
+                      : [
+                          theme.colorScheme.surface.withOpacity(0.95),
+                          theme.colorScheme.surface.withOpacity(0.9),
+                        ],
+                ),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: _isHovered
                       ? theme.colorScheme.primary.withOpacity(0.5)
-                      : Colors.transparent,
-                  width: 1,
+                      : theme.colorScheme.primary.withOpacity(0.3),
+                  width: _isHovered ? 2 : 1.5,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Provider.of<ThemeProvider>(context, listen: false)
+                            .isDarkMode
+                        ? Colors.black.withOpacity(0.3)
+                        : Colors.black.withOpacity(0.1),
                     blurRadius: _elevationAnimation.value,
                     offset: Offset(0, _elevationAnimation.value / 2),
+                    spreadRadius: 2,
                   ),
                   if (_isHovered)
                     BoxShadow(
-                      color: theme.colorScheme.primary.withOpacity(0.2),
-                      blurRadius: 20,
-                      spreadRadius: 2,
+                      color: theme.colorScheme.primary.withOpacity(0.3),
+                      blurRadius: 25,
+                      spreadRadius: 3,
                     ),
                 ],
               ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:portfolio/providers/theme_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:animations/animations.dart';
 
@@ -128,109 +130,133 @@ class _ProjectsScreenState extends State<ProjectsScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
-      body: FadeTransition(
-        opacity: _fadeAnimation,
-        child: LayoutBuilder(builder: (context, constraints) {
-          double screenWidth = constraints.maxWidth;
-          return Padding(
-            padding: EdgeInsets.all(screenWidth > 768 ? 24.0 : 16.0),
-            child: Column(
-              crossAxisAlignment: screenWidth > 768
-                  ? CrossAxisAlignment.start
-                  : CrossAxisAlignment.center,
-              children: [
-                // Header
-                Text(
-                  'My Projects',
-                  style: theme.textTheme.displaySmall?.copyWith(
-                    fontWeight: FontWeight.bold,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: themeProvider.isDarkMode
+                ? [
+                    const Color(0xFF0A0A0A),
+                    const Color(0xFF1E1B4B),
+                    const Color(0xFF312E81),
+                    const Color(0xFF0A0A0A),
+                  ]
+                : [
+                    const Color(0xFFFAFAFA),
+                    const Color(0xFFE5E7EB),
+                    const Color(0xFFD1D5DB),
+                    const Color(0xFFFAFAFA),
+                  ],
+            stops: const [0.0, 0.3, 0.7, 1.0],
+          ),
+        ),
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: LayoutBuilder(builder: (context, constraints) {
+            double screenWidth = constraints.maxWidth;
+            return Padding(
+              padding: EdgeInsets.all(screenWidth > 768 ? 24.0 : 16.0),
+              child: Column(
+                crossAxisAlignment: screenWidth > 768
+                    ? CrossAxisAlignment.start
+                    : CrossAxisAlignment.center,
+                children: [
+                  // Header
+                  Text(
+                    'My Projects',
+                    style: theme.textTheme.displaySmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign:
+                        screenWidth > 768 ? TextAlign.left : TextAlign.center,
                   ),
-                  textAlign:
-                      screenWidth > 768 ? TextAlign.left : TextAlign.center,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Here are some of the projects I\'ve worked on',
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.7),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Here are some of the projects I\'ve worked on',
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onSurface.withOpacity(0.7),
+                    ),
+                    textAlign:
+                        screenWidth > 768 ? TextAlign.left : TextAlign.center,
                   ),
-                  textAlign:
-                      screenWidth > 768 ? TextAlign.left : TextAlign.center,
-                ),
-                const SizedBox(height: 32),
+                  const SizedBox(height: 32),
 
-                // Projects Grid
-                Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      double screenWidth = constraints.maxWidth;
-                      double screenHeight = constraints.maxHeight;
+                  // Projects Grid
+                  Expanded(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        double screenWidth = constraints.maxWidth;
+                        double screenHeight = constraints.maxHeight;
 
-                      // Determine cross axis count based on screen width
-                      int crossAxisCount;
-                      if (screenWidth > 1400) {
-                        crossAxisCount = 4;
-                      } else if (screenWidth > 1200) {
-                        crossAxisCount = 3;
-                      } else if (screenWidth > 768) {
-                        crossAxisCount = 2;
-                      } else {
-                        crossAxisCount = 1;
-                      }
+                        // Determine cross axis count based on screen width
+                        int crossAxisCount;
+                        if (screenWidth > 1400) {
+                          crossAxisCount = 4;
+                        } else if (screenWidth > 1200) {
+                          crossAxisCount = 3;
+                        } else if (screenWidth > 768) {
+                          crossAxisCount = 2;
+                        } else {
+                          crossAxisCount = 1;
+                        }
 
-                      // Calculate responsive spacing
-                      double spacing = screenWidth > 1200
-                          ? 32.0
-                          : screenWidth > 768
-                              ? 24.0
-                              : 16.0;
+                        // Calculate responsive spacing
+                        double spacing = screenWidth > 1200
+                            ? 32.0
+                            : screenWidth > 768
+                                ? 24.0
+                                : 16.0;
 
-                      // Calculate responsive aspect ratio
-                      double aspectRatio;
-                      if (screenWidth > 1400) {
-                        aspectRatio = 0.8; // Wider cards for large screens
-                      } else if (screenWidth > 1200) {
-                        aspectRatio = 0.75;
-                      } else if (screenWidth > 768) {
-                        aspectRatio = 0.7;
-                      } else {
-                        aspectRatio = 0.65; // Taller cards for mobile
-                      }
+                        // Calculate responsive aspect ratio
+                        double aspectRatio;
+                        if (screenWidth > 1400) {
+                          aspectRatio = 0.8; // Wider cards for large screens
+                        } else if (screenWidth > 1200) {
+                          aspectRatio = 0.75;
+                        } else if (screenWidth > 768) {
+                          aspectRatio = 0.7;
+                        } else {
+                          aspectRatio = 0.65; // Taller cards for mobile
+                        }
 
-                      return GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: crossAxisCount,
-                          crossAxisSpacing: spacing,
-                          mainAxisSpacing: spacing,
-                          childAspectRatio: aspectRatio,
-                        ),
-                        itemCount: projects.length,
-                        itemBuilder: (context, index) {
-                          return AnimatedBuilder(
-                            animation: _itemAnimations[index],
-                            builder: (context, child) {
-                              return Transform.scale(
-                                scale: _itemAnimations[index].value,
-                                child: _buildProjectCard(
-                                  projects[index],
-                                  theme,
-                                  screenWidth,
-                                  screenHeight,
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
+                        return GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: spacing,
+                            mainAxisSpacing: spacing,
+                            childAspectRatio: aspectRatio,
+                          ),
+                          itemCount: projects.length,
+                          itemBuilder: (context, index) {
+                            return AnimatedBuilder(
+                              animation: _itemAnimations[index],
+                              builder: (context, child) {
+                                return Transform.scale(
+                                  scale: _itemAnimations[index].value,
+                                  child: _buildProjectCard(
+                                    projects[index],
+                                    theme,
+                                    screenWidth,
+                                    screenHeight,
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        }),
+                ],
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
@@ -248,216 +274,237 @@ class _ProjectsScreenState extends State<ProjectsScreen>
       ),
       transitionDuration: const Duration(milliseconds: 500),
       openBuilder: (context, _) => _buildProjectDetail(project, theme),
-      closedBuilder: (context, openContainer) => Container(
-        decoration: BoxDecoration(
-          color: theme.colorScheme.surface.withOpacity(0.8),
-          borderRadius: BorderRadius.circular(screenWidth > 768 ? 20 : 16),
-          border: Border.all(
-            color: theme.colorScheme.primary.withOpacity(0.1),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: screenWidth > 768 ? 20 : 16,
-              offset: Offset(0, screenWidth > 768 ? 10 : 8),
+      closedBuilder: (context, openContainer) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: themeProvider.isDarkMode
+                  ? [
+                      theme.colorScheme.surface.withOpacity(0.9),
+                      theme.colorScheme.surface.withOpacity(0.85),
+                    ]
+                  : [
+                      theme.colorScheme.surface.withOpacity(0.95),
+                      theme.colorScheme.surface.withOpacity(0.9),
+                    ],
             ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Project Image
-            Expanded(
-              flex: screenWidth > 768 ? 3 : 2,
-              child: ClipRRect(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(screenWidth > 768 ? 20 : 16),
-                ),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Image.asset(
-                      project['image'],
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: theme.colorScheme.surface.withOpacity(0.5),
-                          child: Icon(
-                            Icons.image_not_supported,
-                            color: theme.colorScheme.primary,
-                            size: screenWidth > 768 ? 48 : 32,
-                          ),
-                        );
-                      },
-                    ),
-                    // Gradient overlay
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black.withOpacity(0.7),
-                          ],
-                        ),
-                      ),
-                    ),
-                    // Category badge
-                    Positioned(
-                      top: screenWidth > 768 ? 16 : 12,
-                      right: screenWidth > 768 ? 16 : 12,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: screenWidth > 768 ? 12 : 8,
-                          vertical: screenWidth > 768 ? 6 : 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.primary.withOpacity(0.9),
-                          borderRadius: BorderRadius.circular(
-                            screenWidth > 768 ? 20 : 16,
-                          ),
-                        ),
-                        child: Text(
-                          project['category'],
-                          style: (screenWidth > 768
-                                  ? theme.textTheme.bodySmall
-                                  : theme.textTheme.bodySmall
-                                      ?.copyWith(fontSize: 10))
-                              ?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+            borderRadius: BorderRadius.circular(screenWidth > 768 ? 20 : 16),
+            border: Border.all(
+              color: theme.colorScheme.primary.withOpacity(0.3),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: themeProvider.isDarkMode
+                    ? Colors.black.withOpacity(0.3)
+                    : Colors.black.withOpacity(0.1),
+                blurRadius: screenWidth > 768 ? 25 : 20,
+                offset: Offset(0, screenWidth > 768 ? 15 : 12),
+                spreadRadius: 2,
               ),
-            ),
-
-            // Project Info
-            Expanded(
-              flex: screenWidth > 768 ? 2 : 3,
-              child: Padding(
-                padding: EdgeInsets.all(screenWidth > 768 ? 20 : 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      project['title'],
-                      style: (screenWidth > 768
-                              ? theme.textTheme.headlineSmall
-                              : theme.textTheme.titleLarge)
-                          ?.copyWith(
-                        fontWeight: FontWeight.bold,
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Project Image
+              Expanded(
+                flex: screenWidth > 768 ? 3 : 2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(screenWidth > 768 ? 20 : 16),
+                  ),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.asset(
+                        project['image'],
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            color: theme.colorScheme.surface.withOpacity(0.5),
+                            child: Icon(
+                              Icons.image_not_supported,
+                              color: theme.colorScheme.primary,
+                              size: screenWidth > 768 ? 48 : 32,
+                            ),
+                          );
+                        },
                       ),
-                      maxLines: screenWidth > 768 ? 2 : 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: screenWidth > 768 ? 8 : 6),
-                    Text(
-                      project['description'],
-                      style: (screenWidth > 768
-                              ? theme.textTheme.bodyMedium
-                              : theme.textTheme.bodySmall)
-                          ?.copyWith(
-                        color: theme.colorScheme.onSurface.withOpacity(0.7),
+                      // Gradient overlay
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.transparent,
+                              Colors.black.withOpacity(0.7),
+                            ],
+                          ),
+                        ),
                       ),
-                      maxLines: screenWidth > 768 ? 2 : 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 12),
-
-                    // Tech stack
-                    Wrap(
-                      spacing: screenWidth > 768 ? 6 : 4,
-                      runSpacing: screenWidth > 768 ? 6 : 4,
-                      children: (project['tech'] as List<String>)
-                          .take(screenWidth > 768 ? 3 : 2)
-                          .map((tech) {
-                        return Container(
+                      // Category badge
+                      Positioned(
+                        top: screenWidth > 768 ? 16 : 12,
+                        right: screenWidth > 768 ? 16 : 12,
+                        child: Container(
                           padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth > 768 ? 8 : 6,
-                            vertical: screenWidth > 768 ? 4 : 3,
+                            horizontal: screenWidth > 768 ? 12 : 8,
+                            vertical: screenWidth > 768 ? 6 : 4,
                           ),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.primary.withOpacity(0.1),
+                            color: theme.colorScheme.primary.withOpacity(0.9),
                             borderRadius: BorderRadius.circular(
-                              screenWidth > 768 ? 12 : 8,
+                              screenWidth > 768 ? 20 : 16,
                             ),
                           ),
                           child: Text(
-                            tech,
+                            project['category'],
                             style: (screenWidth > 768
                                     ? theme.textTheme.bodySmall
                                     : theme.textTheme.bodySmall
                                         ?.copyWith(fontSize: 10))
                                 ?.copyWith(
-                              color: theme.colorScheme.primary,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-
-                    const Spacer(),
-
-                    // Action buttons
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: () => _launchURL(project['url']),
-                            icon: Icon(
-                              Icons.open_in_new,
-                              size: screenWidth > 768 ? 16 : 14,
-                            ),
-                            label: Text(
-                              screenWidth > 768 ? 'View Project' : 'View',
-                              style: TextStyle(
-                                fontSize: screenWidth > 768 ? null : 12,
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(
-                                vertical: screenWidth > 768 ? 12 : 8,
-                              ),
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
-                        SizedBox(width: screenWidth > 768 ? 8 : 6),
-                        IconButton(
-                          onPressed: openContainer,
-                          icon: Icon(
-                            Icons.info_outline,
-                            size: screenWidth > 768 ? 24 : 20,
-                          ),
-                          style: IconButton.styleFrom(
-                            backgroundColor: theme.colorScheme.surface,
-                            foregroundColor: theme.colorScheme.primary,
-                            padding: EdgeInsets.all(
-                              screenWidth > 768 ? 8 : 6,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+
+              // Project Info
+              Expanded(
+                flex: screenWidth > 768 ? 2 : 3,
+                child: Padding(
+                  padding: EdgeInsets.all(screenWidth > 768 ? 20 : 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        project['title'],
+                        style: (screenWidth > 768
+                                ? theme.textTheme.headlineSmall
+                                : theme.textTheme.titleLarge)
+                            ?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: screenWidth > 768 ? 2 : 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: screenWidth > 768 ? 8 : 6),
+                      Text(
+                        project['description'],
+                        style: (screenWidth > 768
+                                ? theme.textTheme.bodyMedium
+                                : theme.textTheme.bodySmall)
+                            ?.copyWith(
+                          color: theme.colorScheme.onSurface.withOpacity(0.7),
+                        ),
+                        maxLines: screenWidth > 768 ? 2 : 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 12),
+
+                      // Tech stack
+                      Wrap(
+                        spacing: screenWidth > 768 ? 6 : 4,
+                        runSpacing: screenWidth > 768 ? 6 : 4,
+                        children: (project['tech'] as List<String>)
+                            .take(screenWidth > 768 ? 3 : 2)
+                            .map((tech) {
+                          return Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth > 768 ? 8 : 6,
+                              vertical: screenWidth > 768 ? 4 : 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: theme.colorScheme.primary.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(
+                                screenWidth > 768 ? 12 : 8,
+                              ),
+                            ),
+                            child: Text(
+                              tech,
+                              style: (screenWidth > 768
+                                      ? theme.textTheme.bodySmall
+                                      : theme.textTheme.bodySmall
+                                          ?.copyWith(fontSize: 10))
+                                  ?.copyWith(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+
+                      const Spacer(),
+
+                      // Action buttons
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () => _launchURL(project['url']),
+                              icon: Icon(
+                                Icons.open_in_new,
+                                size: screenWidth > 768 ? 16 : 14,
+                              ),
+                              label: Text(
+                                screenWidth > 768 ? 'View Project' : 'View',
+                                style: TextStyle(
+                                  fontSize: screenWidth > 768 ? null : 12,
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: screenWidth > 768 ? 12 : 8,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: screenWidth > 768 ? 8 : 6),
+                          IconButton(
+                            onPressed: openContainer,
+                            icon: Icon(
+                              Icons.info_outline,
+                              size: screenWidth > 768 ? 24 : 20,
+                            ),
+                            style: IconButton.styleFrom(
+                              backgroundColor: theme.colorScheme.surface,
+                              foregroundColor: theme.colorScheme.primary,
+                              padding: EdgeInsets.all(
+                                screenWidth > 768 ? 8 : 6,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
   Widget _buildProjectDetail(Map<String, dynamic> project, ThemeData theme) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface,
+      backgroundColor: themeProvider.isDarkMode
+          ? theme.colorScheme.surface
+          : theme.colorScheme.surface,
       appBar: AppBar(
         title: Text(project['title']),
         backgroundColor: Colors.transparent,
@@ -476,9 +523,12 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 20,
-                    offset: const Offset(0, 10),
+                    color: themeProvider.isDarkMode
+                        ? Colors.black.withOpacity(0.3)
+                        : Colors.black.withOpacity(0.1),
+                    blurRadius: 25,
+                    offset: const Offset(0, 15),
+                    spreadRadius: 2,
                   ),
                 ],
               ),

@@ -57,17 +57,40 @@ class _ResumeScreenState extends State<ResumeScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isMobile = MediaQuery.of(context).size.width < 768;
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
-      body: FadeTransition(
-        opacity: _fadeAnimation,
-        child: SlideTransition(
-          position: _slideAnimation,
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: isMobile
-                ? _buildMobileLayout(theme)
-                : _buildDesktopLayout(theme),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: themeProvider.isDarkMode
+                ? [
+                    const Color(0xFF0A0A0A),
+                    const Color(0xFF1E1B4B),
+                    const Color(0xFF312E81),
+                    const Color(0xFF0A0A0A),
+                  ]
+                : [
+                    const Color(0xFFFAFAFA),
+                    const Color(0xFFE5E7EB),
+                    const Color(0xFFD1D5DB),
+                    const Color(0xFFFAFAFA),
+                  ],
+            stops: const [0.0, 0.3, 0.7, 1.0],
+          ),
+        ),
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: SlideTransition(
+            position: _slideAnimation,
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: isMobile
+                  ? _buildMobileLayout(theme)
+                  : _buildDesktopLayout(theme),
+            ),
           ),
         ),
       ),
@@ -124,75 +147,101 @@ class _ResumeScreenState extends State<ResumeScreen>
   }
 
   Widget _buildHeader(ThemeData theme) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.2),
-          width: 1,
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: themeProvider.isDarkMode
+                ? [
+                    theme.colorScheme.surface.withOpacity(0.9),
+                    theme.colorScheme.surface.withOpacity(0.85),
+                  ]
+                : [
+                    theme.colorScheme.surface.withOpacity(0.95),
+                    theme.colorScheme.surface.withOpacity(0.9),
+                  ],
+          ),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: theme.colorScheme.primary.withOpacity(0.3),
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: themeProvider.isDarkMode
+                  ? Colors.black.withOpacity(0.3)
+                  : Colors.black.withOpacity(0.1),
+              blurRadius: 25,
+              offset: const Offset(0, 15),
+              spreadRadius: 2,
+            ),
+          ],
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Resume',
-            style: theme.textTheme.displaySmall?.copyWith(
-              fontWeight: FontWeight.bold,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Resume',
+              style: theme.textTheme.displaySmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Solomon Ondula Omusinde',
-            style: theme.textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.primary,
+            const SizedBox(height: 16),
+            Text(
+              'Solomon Ondula Omusinde',
+              style: theme.textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: theme.colorScheme.primary,
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Flutter Developer',
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: theme.colorScheme.secondary,
-              letterSpacing: 1.5,
+            const SizedBox(height: 8),
+            Text(
+              'Flutter Developer',
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: theme.colorScheme.secondary,
+                letterSpacing: 1.5,
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Passionate Flutter developer with expertise in cross-platform mobile and web development. Experienced in building scalable applications with modern development practices.',
-            style: theme.textTheme.bodyLarge?.copyWith(
-              height: 1.6,
+            const SizedBox(height: 16),
+            Text(
+              'Passionate Flutter developer with expertise in cross-platform mobile and web development. Experienced in building scalable applications with modern development practices.',
+              style: theme.textTheme.bodyLarge?.copyWith(
+                height: 1.6,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildMobileHeader(ThemeData theme) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
+        color: themeProvider.isDarkMode
+            ? theme.colorScheme.surface.withOpacity(0.9)
+            : theme.colorScheme.surface.withOpacity(0.95),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.2),
-          width: 1,
+          color: theme.colorScheme.primary.withOpacity(0.3),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.3)
+                : Colors.black.withOpacity(0.1),
+            blurRadius: 25,
+            offset: const Offset(0, 15),
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -238,20 +287,26 @@ class _ResumeScreenState extends State<ResumeScreen>
   }
 
   Widget _buildExperienceSection(ThemeData theme) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
+        color: themeProvider.isDarkMode
+            ? theme.colorScheme.surface.withOpacity(0.9)
+            : theme.colorScheme.surface.withOpacity(0.95),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.2),
-          width: 1,
+          color: theme.colorScheme.primary.withOpacity(0.3),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.3)
+                : Colors.black.withOpacity(0.1),
+            blurRadius: 25,
+            offset: const Offset(0, 15),
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -315,15 +370,27 @@ class _ResumeScreenState extends State<ResumeScreen>
     String period,
     List<String> responsibilities,
   ) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.5),
+        color: themeProvider.isDarkMode
+            ? theme.colorScheme.surface.withOpacity(0.6)
+            : theme.colorScheme.surface.withOpacity(0.7),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.1),
+          color: theme.colorScheme.primary.withOpacity(0.2),
           width: 1,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.2)
+                : Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -345,6 +412,10 @@ class _ResumeScreenState extends State<ResumeScreen>
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: theme.colorScheme.primary.withOpacity(0.3),
+                    width: 1,
+                  ),
                 ),
                 child: Text(
                   period,
@@ -397,20 +468,26 @@ class _ResumeScreenState extends State<ResumeScreen>
   }
 
   Widget _buildEducationSection(ThemeData theme) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
+        color: themeProvider.isDarkMode
+            ? theme.colorScheme.surface.withOpacity(0.9)
+            : theme.colorScheme.surface.withOpacity(0.95),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.2),
-          width: 1,
+          color: theme.colorScheme.primary.withOpacity(0.3),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.3)
+                : Colors.black.withOpacity(0.1),
+            blurRadius: 25,
+            offset: const Offset(0, 15),
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -453,15 +530,27 @@ class _ResumeScreenState extends State<ResumeScreen>
     String period,
     String description,
   ) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.5),
+        color: themeProvider.isDarkMode
+            ? theme.colorScheme.surface.withOpacity(0.6)
+            : theme.colorScheme.surface.withOpacity(0.7),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.1),
+          color: theme.colorScheme.primary.withOpacity(0.2),
           width: 1,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.2)
+                : Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -483,6 +572,10 @@ class _ResumeScreenState extends State<ResumeScreen>
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: theme.colorScheme.primary.withOpacity(0.3),
+                    width: 1,
+                  ),
                 ),
                 child: Text(
                   period,
@@ -515,20 +608,26 @@ class _ResumeScreenState extends State<ResumeScreen>
   }
 
   Widget _buildSkillsSection(ThemeData theme) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
+        color: themeProvider.isDarkMode
+            ? theme.colorScheme.surface.withOpacity(0.9)
+            : theme.colorScheme.surface.withOpacity(0.95),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.2),
-          width: 1,
+          color: theme.colorScheme.primary.withOpacity(0.3),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.3)
+                : Colors.black.withOpacity(0.1),
+            blurRadius: 25,
+            offset: const Offset(0, 15),
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -571,6 +670,7 @@ class _ResumeScreenState extends State<ResumeScreen>
 
   Widget _buildSkillCategory(
       ThemeData theme, String category, List<String> skills) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -590,18 +690,29 @@ class _ResumeScreenState extends State<ResumeScreen>
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: theme.colorScheme.primary.withOpacity(0.1),
+                      color: themeProvider.isDarkMode
+                          ? theme.colorScheme.primary.withOpacity(0.15)
+                          : theme.colorScheme.primary.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: theme.colorScheme.primary.withOpacity(0.2),
+                        color: theme.colorScheme.primary.withOpacity(0.3),
                         width: 1,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: themeProvider.isDarkMode
+                              ? Colors.black.withOpacity(0.1)
+                              : Colors.black.withOpacity(0.05),
+                          blurRadius: 5,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
                     child: Text(
                       skill,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.primary,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ))

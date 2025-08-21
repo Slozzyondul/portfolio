@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:portfolio/providers/theme_provider.dart';
 import 'package:portfolio/methods/contact_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -109,19 +111,43 @@ class _ContactScreenState extends State<ContactScreen>
                 ? 24.0
                 : 24.0;
 
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
-      body: FadeTransition(
-        opacity: _fadeAnimation,
-        child: SlideTransition(
-          position: _slideAnimation,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalPadding,
-              vertical: verticalPadding,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: themeProvider.isDarkMode
+                ? [
+                    const Color(0xFF0A0A0A),
+                    const Color(0xFF1E1B4B),
+                    const Color(0xFF312E81),
+                    const Color(0xFF0A0A0A),
+                  ]
+                : [
+                    const Color(0xFFFAFAFA),
+                    const Color(0xFFE5E7EB),
+                    const Color(0xFFD1D5DB),
+                    const Color(0xFFFAFAFA),
+                  ],
+            stops: const [0.0, 0.3, 0.7, 1.0],
+          ),
+        ),
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: SlideTransition(
+            position: _slideAnimation,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalPadding,
+                vertical: verticalPadding,
+              ),
+              child: isMobile
+                  ? _buildMobileLayout(theme, isSmallPhone, isVerySmallPhone)
+                  : _buildDesktopLayout(theme),
             ),
-            child: isMobile
-                ? _buildMobileLayout(theme, isSmallPhone, isVerySmallPhone)
-                : _buildDesktopLayout(theme),
           ),
         ),
       ),
@@ -230,6 +256,7 @@ class _ContactScreenState extends State<ContactScreen>
 
   Widget _buildContactInfo(
       ThemeData theme, bool isSmallPhone, bool isVerySmallPhone) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final containerPadding = isVerySmallPhone
         ? 16.0
         : isSmallPhone
@@ -241,17 +268,32 @@ class _ContactScreenState extends State<ContactScreen>
     return Container(
       padding: EdgeInsets.all(containerPadding),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: themeProvider.isDarkMode
+              ? [
+                  theme.colorScheme.surface.withOpacity(0.9),
+                  theme.colorScheme.surface.withOpacity(0.85),
+                ]
+              : [
+                  theme.colorScheme.surface.withOpacity(0.95),
+                  theme.colorScheme.surface.withOpacity(0.9),
+                ],
+        ),
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.2),
-          width: 1,
+          color: theme.colorScheme.primary.withOpacity(0.3),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.3)
+                : Colors.black.withOpacity(0.1),
+            blurRadius: 25,
+            offset: const Offset(0, 15),
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -427,6 +469,7 @@ class _ContactScreenState extends State<ContactScreen>
 
   Widget _buildContactForm(
       ThemeData theme, bool isSmallPhone, bool isVerySmallPhone) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final containerPadding = isVerySmallPhone
         ? 16.0
         : isSmallPhone
@@ -439,17 +482,32 @@ class _ContactScreenState extends State<ContactScreen>
     return Container(
       padding: EdgeInsets.all(containerPadding),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: themeProvider.isDarkMode
+              ? [
+                  theme.colorScheme.surface.withOpacity(0.9),
+                  theme.colorScheme.surface.withOpacity(0.85),
+                ]
+              : [
+                  theme.colorScheme.surface.withOpacity(0.95),
+                  theme.colorScheme.surface.withOpacity(0.9),
+                ],
+        ),
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.2),
-          width: 1,
+          color: theme.colorScheme.primary.withOpacity(0.3),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.3)
+                : Colors.black.withOpacity(0.1),
+            blurRadius: 25,
+            offset: const Offset(0, 15),
+            spreadRadius: 2,
           ),
         ],
       ),

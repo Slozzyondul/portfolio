@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:portfolio/providers/theme_provider.dart';
 import 'package:portfolio/methods/contact_info.dart';
 import 'package:portfolio/methods/service_card.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -58,17 +60,40 @@ class _AboutScreenState extends State<AboutScreen>
   Widget build(BuildContext context) {
     final bool isMobile = MediaQuery.of(context).size.width < 768;
     final theme = Theme.of(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
-      body: FadeTransition(
-        opacity: _fadeAnimation,
-        child: SlideTransition(
-          position: _slideAnimation,
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: isMobile
-                ? _buildMobileLayout(theme)
-                : _buildDesktopLayout(theme),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: themeProvider.isDarkMode
+                ? [
+                    const Color(0xFF0A0A0A),
+                    const Color(0xFF1E1B4B),
+                    const Color(0xFF312E81),
+                    const Color(0xFF0A0A0A),
+                  ]
+                : [
+                    const Color(0xFFFAFAFA),
+                    const Color(0xFFE5E7EB),
+                    const Color(0xFFD1D5DB),
+                    const Color(0xFFFAFAFA),
+                  ],
+            stops: const [0.0, 0.3, 0.7, 1.0],
+          ),
+        ),
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: SlideTransition(
+            position: _slideAnimation,
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: isMobile
+                  ? _buildMobileLayout(theme)
+                  : _buildDesktopLayout(theme),
+            ),
           ),
         ),
       ),
@@ -116,20 +141,36 @@ class _AboutScreenState extends State<AboutScreen>
   }
 
   Widget _buildProfileSection(ThemeData theme) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: themeProvider.isDarkMode
+              ? [
+                  theme.colorScheme.surface.withOpacity(0.9),
+                  theme.colorScheme.surface.withOpacity(0.85),
+                ]
+              : [
+                  theme.colorScheme.surface.withOpacity(0.95),
+                  theme.colorScheme.surface.withOpacity(0.9),
+                ],
+        ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.2),
-          width: 1,
+          color: theme.colorScheme.primary.withOpacity(0.3),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.3)
+                : Colors.black.withOpacity(0.1),
+            blurRadius: 25,
+            offset: const Offset(0, 15),
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -223,20 +264,36 @@ class _AboutScreenState extends State<AboutScreen>
   }
 
   Widget _buildMobileProfileSection(ThemeData theme) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: themeProvider.isDarkMode
+              ? [
+                  theme.colorScheme.surface.withOpacity(0.9),
+                  theme.colorScheme.surface.withOpacity(0.85),
+                ]
+              : [
+                  theme.colorScheme.surface.withOpacity(0.95),
+                  theme.colorScheme.surface.withOpacity(0.9),
+                ],
+        ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.2),
-          width: 1,
+          color: theme.colorScheme.primary.withOpacity(0.3),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: themeProvider.isDarkMode
+                ? Colors.black.withOpacity(0.3)
+                : Colors.black.withOpacity(0.1),
+            blurRadius: 25,
+            offset: const Offset(0, 15),
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -332,6 +389,7 @@ class _AboutScreenState extends State<AboutScreen>
   }
 
   Widget _buildMainContent(ThemeData theme) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -346,12 +404,33 @@ class _AboutScreenState extends State<AboutScreen>
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: theme.colorScheme.surface.withOpacity(0.5),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: themeProvider.isDarkMode
+                  ? [
+                      theme.colorScheme.surface.withOpacity(0.6),
+                      theme.colorScheme.surface.withOpacity(0.5),
+                    ]
+                  : [
+                      theme.colorScheme.surface.withOpacity(0.7),
+                      theme.colorScheme.surface.withOpacity(0.6),
+                    ],
+            ),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: theme.colorScheme.primary.withOpacity(0.1),
+              color: theme.colorScheme.primary.withOpacity(0.2),
               width: 1,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: themeProvider.isDarkMode
+                    ? Colors.black.withOpacity(0.2)
+                    : Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
           ),
           child: Text(
             'A passionate Flutter developer with strong expertise in cross-platform applications. I specialize in creating beautiful, performant, and user-friendly mobile and web applications using modern development practices and cutting-edge technologies.',
