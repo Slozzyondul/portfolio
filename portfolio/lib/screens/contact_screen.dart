@@ -85,7 +85,29 @@ class _ContactScreenState extends State<ContactScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isMobile = MediaQuery.of(context).size.width < 768;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Responsive breakpoints
+    final isMobile = screenWidth < 768;
+    final isSmallPhone = screenWidth < 400;
+    final isVerySmallPhone = screenWidth < 320;
+
+    // Responsive padding
+    final horizontalPadding = isVerySmallPhone
+        ? 12.0
+        : isSmallPhone
+            ? 16.0
+            : isMobile
+                ? 20.0
+                : 24.0;
+
+    final verticalPadding = isVerySmallPhone
+        ? 16.0
+        : isSmallPhone
+            ? 20.0
+            : isMobile
+                ? 24.0
+                : 24.0;
 
     return Scaffold(
       body: FadeTransition(
@@ -93,9 +115,12 @@ class _ContactScreenState extends State<ContactScreen>
         child: SlideTransition(
           position: _slideAnimation,
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.symmetric(
+              horizontal: horizontalPadding,
+              vertical: verticalPadding,
+            ),
             child: isMobile
-                ? _buildMobileLayout(theme)
+                ? _buildMobileLayout(theme, isSmallPhone, isVerySmallPhone)
                 : _buildDesktopLayout(theme),
           ),
         ),
@@ -103,23 +128,24 @@ class _ContactScreenState extends State<ContactScreen>
     );
   }
 
-  Widget _buildMobileLayout(ThemeData theme) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        // Header
-        _buildMobileHeader(theme),
-        const SizedBox(height: 24),
+  Widget _buildMobileLayout(
+      ThemeData theme, bool isSmallPhone, bool isVerySmallPhone) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Header
+          _buildMobileHeader(theme, isSmallPhone, isVerySmallPhone),
+          SizedBox(height: isVerySmallPhone ? 16 : 24),
 
-        // Contact Info
-        _buildContactInfo(theme),
-        const SizedBox(height: 24),
+          // Contact Info
+          _buildContactInfo(theme, isSmallPhone, isVerySmallPhone),
+          SizedBox(height: isVerySmallPhone ? 16 : 24),
 
-        // Contact Form
-        Expanded(
-          child: _buildContactForm(theme),
-        ),
-      ],
+          // Contact Form
+          _buildContactForm(theme, isSmallPhone, isVerySmallPhone),
+        ],
+      ),
     );
   }
 
@@ -134,7 +160,7 @@ class _ContactScreenState extends State<ContactScreen>
             children: [
               _buildHeader(theme),
               const SizedBox(height: 32),
-              _buildContactInfo(theme),
+              _buildContactInfo(theme, false, false),
             ],
           ),
         ),
@@ -143,7 +169,7 @@ class _ContactScreenState extends State<ContactScreen>
         // Right Side - Contact Form
         Expanded(
           flex: 2,
-          child: _buildContactForm(theme),
+          child: _buildContactForm(theme, false, false),
         ),
       ],
     );
@@ -170,21 +196,30 @@ class _ContactScreenState extends State<ContactScreen>
     );
   }
 
-  Widget _buildMobileHeader(ThemeData theme) {
+  Widget _buildMobileHeader(
+      ThemeData theme, bool isSmallPhone, bool isVerySmallPhone) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           'Get In Touch',
-          style: theme.textTheme.displaySmall?.copyWith(
+          style: (isVerySmallPhone
+                  ? theme.textTheme.headlineMedium
+                  : isSmallPhone
+                      ? theme.textTheme.headlineSmall
+                      : theme.textTheme.displaySmall)
+              ?.copyWith(
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: isVerySmallPhone ? 4 : 8),
         Text(
           'Let\'s discuss your next project or just say hello!',
-          style: theme.textTheme.bodyLarge?.copyWith(
+          style: (isVerySmallPhone
+                  ? theme.textTheme.bodyMedium
+                  : theme.textTheme.bodyLarge)
+              ?.copyWith(
             color: theme.colorScheme.onSurface.withOpacity(0.7),
           ),
           textAlign: TextAlign.center,
@@ -193,12 +228,21 @@ class _ContactScreenState extends State<ContactScreen>
     );
   }
 
-  Widget _buildContactInfo(ThemeData theme) {
+  Widget _buildContactInfo(
+      ThemeData theme, bool isSmallPhone, bool isVerySmallPhone) {
+    final containerPadding = isVerySmallPhone
+        ? 16.0
+        : isSmallPhone
+            ? 20.0
+            : 24.0;
+
+    final borderRadius = isVerySmallPhone ? 12.0 : 20.0;
+
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(containerPadding),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface.withOpacity(0.8),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
           color: theme.colorScheme.primary.withOpacity(0.2),
           width: 1,
@@ -216,65 +260,111 @@ class _ContactScreenState extends State<ContactScreen>
         children: [
           Text(
             'Contact Information',
-            style: theme.textTheme.headlineSmall?.copyWith(
+            style: (isVerySmallPhone
+                    ? theme.textTheme.titleLarge
+                    : theme.textTheme.headlineSmall)
+                ?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: isVerySmallPhone ? 16 : 20),
           ContactInfo(
             icon: Icons.email,
             text: 'solomonondula@gmail.com',
             onTap: () => _launchEmail('solomonondula@gmail.com'),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: isVerySmallPhone ? 8 : 12),
           ContactInfo(
             icon: Icons.phone,
             text: '+254 792352745',
             onTap: () => _launchPhone('+254792352745'),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: isVerySmallPhone ? 8 : 12),
           ContactInfo(
             icon: Icons.location_on,
             text: 'Nairobi, Kenya',
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: isVerySmallPhone ? 8 : 12),
           ContactInfo(
             icon: Icons.link,
             text: "LinkedIn Profile",
             onTap: () => _launchURL(
                 'https://www.linkedin.com/in/solomon-ondula-4993471a7/'),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: isVerySmallPhone ? 16 : 24),
 
           // Social Links
           Text(
             'Follow Me',
-            style: theme.textTheme.titleMedium?.copyWith(
+            style: (isVerySmallPhone
+                    ? theme.textTheme.titleSmall
+                    : theme.textTheme.titleMedium)
+                ?.copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              _buildSocialButton(
-                icon: Icons.link,
-                label: 'LinkedIn',
-                onTap: () => _launchURL(
-                    'https://www.linkedin.com/in/solomon-ondula-4993471a7/'),
-                theme: theme,
-              ),
-              const SizedBox(width: 12),
-              _buildSocialButton(
-                icon: Icons.code,
-                label: 'GitHub',
-                onTap: () => _launchURL('https://github.com/slozzyondul'),
-                theme: theme,
-              ),
-            ],
-          ),
+          SizedBox(height: isVerySmallPhone ? 12 : 16),
+          _buildSocialButtons(theme, isSmallPhone, isVerySmallPhone),
         ],
       ),
     );
+  }
+
+  Widget _buildSocialButtons(
+      ThemeData theme, bool isSmallPhone, bool isVerySmallPhone) {
+    if (isVerySmallPhone) {
+      // Stack buttons vertically on very small screens
+      return Column(
+        children: [
+          _buildSocialButton(
+            icon: Icons.link,
+            label: 'LinkedIn',
+            onTap: () => _launchURL(
+                'https://www.linkedin.com/in/solomon-ondula-4993471a7/'),
+            theme: theme,
+            isSmallPhone: isSmallPhone,
+            isVerySmallPhone: isVerySmallPhone,
+          ),
+          SizedBox(height: isVerySmallPhone ? 8 : 12),
+          _buildSocialButton(
+            icon: Icons.code,
+            label: 'GitHub',
+            onTap: () => _launchURL('https://github.com/slozzyondul'),
+            theme: theme,
+            isSmallPhone: isSmallPhone,
+            isVerySmallPhone: isVerySmallPhone,
+          ),
+        ],
+      );
+    } else {
+      // Use row layout for larger screens
+      return Row(
+        children: [
+          Expanded(
+            child: _buildSocialButton(
+              icon: Icons.link,
+              label: 'LinkedIn',
+              onTap: () => _launchURL(
+                  'https://www.linkedin.com/in/solomon-ondula-4993471a7/'),
+              theme: theme,
+              isSmallPhone: isSmallPhone,
+              isVerySmallPhone: isVerySmallPhone,
+            ),
+          ),
+          SizedBox(width: isSmallPhone ? 8 : 12),
+          Expanded(
+            child: _buildSocialButton(
+              icon: Icons.code,
+              label: 'GitHub',
+              onTap: () => _launchURL('https://github.com/slozzyondul'),
+              theme: theme,
+              isSmallPhone: isSmallPhone,
+              isVerySmallPhone: isVerySmallPhone,
+            ),
+          ),
+        ],
+      );
+    }
   }
 
   Widget _buildSocialButton({
@@ -282,14 +372,25 @@ class _ContactScreenState extends State<ContactScreen>
     required String label,
     required VoidCallback onTap,
     required ThemeData theme,
+    required bool isSmallPhone,
+    required bool isVerySmallPhone,
   }) {
+    final padding = isVerySmallPhone
+        ? const EdgeInsets.symmetric(horizontal: 12, vertical: 8)
+        : isSmallPhone
+            ? const EdgeInsets.symmetric(horizontal: 14, vertical: 10)
+            : const EdgeInsets.symmetric(horizontal: 16, vertical: 12);
+
+    final borderRadius = isVerySmallPhone ? 8.0 : 12.0;
+    final iconSize = isVerySmallPhone ? 16.0 : 18.0;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: padding,
         decoration: BoxDecoration(
           color: theme.colorScheme.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(borderRadius),
           border: Border.all(
             color: theme.colorScheme.primary.withOpacity(0.2),
             width: 1,
@@ -297,18 +398,25 @@ class _ContactScreenState extends State<ContactScreen>
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               icon,
               color: theme.colorScheme.primary,
-              size: 18,
+              size: iconSize,
             ),
-            const SizedBox(width: 8),
-            Text(
-              label,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.primary,
-                fontWeight: FontWeight.w600,
+            SizedBox(width: isVerySmallPhone ? 6 : 8),
+            Flexible(
+              child: Text(
+                label,
+                style: (isVerySmallPhone
+                        ? theme.textTheme.bodySmall
+                        : theme.textTheme.bodyMedium)
+                    ?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
@@ -317,12 +425,22 @@ class _ContactScreenState extends State<ContactScreen>
     );
   }
 
-  Widget _buildContactForm(ThemeData theme) {
+  Widget _buildContactForm(
+      ThemeData theme, bool isSmallPhone, bool isVerySmallPhone) {
+    final containerPadding = isVerySmallPhone
+        ? 16.0
+        : isSmallPhone
+            ? 20.0
+            : 24.0;
+
+    final borderRadius = isVerySmallPhone ? 12.0 : 20.0;
+    final fieldSpacing = isVerySmallPhone ? 12.0 : 16.0;
+
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(containerPadding),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface.withOpacity(0.8),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
           color: theme.colorScheme.primary.withOpacity(0.2),
           width: 1,
@@ -342,11 +460,14 @@ class _ContactScreenState extends State<ContactScreen>
           children: [
             Text(
               'Send Message',
-              style: theme.textTheme.headlineSmall?.copyWith(
+              style: (isVerySmallPhone
+                      ? theme.textTheme.titleLarge
+                      : theme.textTheme.headlineSmall)
+                  ?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: isVerySmallPhone ? 16 : 24),
 
             // Name Field
             _buildTextField(
@@ -360,8 +481,10 @@ class _ContactScreenState extends State<ContactScreen>
                 return null;
               },
               theme: theme,
+              isSmallPhone: isSmallPhone,
+              isVerySmallPhone: isVerySmallPhone,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: fieldSpacing),
 
             // Email Field
             _buildTextField(
@@ -380,8 +503,10 @@ class _ContactScreenState extends State<ContactScreen>
                 return null;
               },
               theme: theme,
+              isSmallPhone: isSmallPhone,
+              isVerySmallPhone: isVerySmallPhone,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: fieldSpacing),
 
             // Subject Field
             _buildTextField(
@@ -395,15 +520,17 @@ class _ContactScreenState extends State<ContactScreen>
                 return null;
               },
               theme: theme,
+              isSmallPhone: isSmallPhone,
+              isVerySmallPhone: isVerySmallPhone,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: fieldSpacing),
 
             // Message Field
             _buildTextField(
               controller: _messageController,
               label: 'Message',
               icon: Icons.message,
-              maxLines: 5,
+              maxLines: isVerySmallPhone ? 4 : 5,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your message';
@@ -411,18 +538,27 @@ class _ContactScreenState extends State<ContactScreen>
                 return null;
               },
               theme: theme,
+              isSmallPhone: isSmallPhone,
+              isVerySmallPhone: isVerySmallPhone,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: isVerySmallPhone ? 16 : 24),
 
             // Submit Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _submitForm,
-                icon: const Icon(Icons.send),
-                label: const Text('Send Message'),
+                icon: Icon(Icons.send, size: isVerySmallPhone ? 18 : 24),
+                label: Text(
+                  'Send Message',
+                  style: TextStyle(
+                    fontSize: isVerySmallPhone ? 14 : 16,
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: EdgeInsets.symmetric(
+                    vertical: isVerySmallPhone ? 12 : 16,
+                  ),
                 ),
               ),
             ),
@@ -438,45 +574,57 @@ class _ContactScreenState extends State<ContactScreen>
     required IconData icon,
     required String? Function(String?) validator,
     required ThemeData theme,
+    required bool isSmallPhone,
+    required bool isVerySmallPhone,
     TextInputType? keyboardType,
     int maxLines = 1,
   }) {
+    final borderRadius = isVerySmallPhone ? 8.0 : 12.0;
+    final iconSize = isVerySmallPhone ? 20.0 : 24.0;
+
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
       validator: validator,
-      style: theme.textTheme.bodyLarge,
+      style: (isVerySmallPhone
+          ? theme.textTheme.bodyMedium
+          : theme.textTheme.bodyLarge),
       decoration: InputDecoration(
         labelText: label,
-        prefixIcon: Icon(icon, color: theme.colorScheme.primary),
+        prefixIcon:
+            Icon(icon, color: theme.colorScheme.primary, size: iconSize),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
             color: theme.colorScheme.primary.withOpacity(0.2),
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
             color: theme.colorScheme.primary.withOpacity(0.2),
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
             color: theme.colorScheme.primary,
             width: 2,
           ),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
             color: theme.colorScheme.error,
           ),
         ),
         filled: true,
         fillColor: theme.colorScheme.surface.withOpacity(0.5),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: isVerySmallPhone ? 12 : 16,
+          vertical: isVerySmallPhone ? 12 : 16,
+        ),
       ),
     );
   }
