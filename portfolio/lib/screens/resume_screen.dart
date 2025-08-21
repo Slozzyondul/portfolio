@@ -432,10 +432,10 @@ class _ResumeScreenState extends State<ResumeScreen>
           const SizedBox(height: 24),
           _buildEducationItem(
             theme,
-            'Bachelor of Science in Computer Science',
+            'Bachelor of Science in Mathematics',
             'University of Nairobi',
-            '2019 - 2023',
-            'Graduated with honors in Computer Science with focus on software development and algorithms.',
+            'Sep 2016 - Sep 2023',
+            'Graduated with honors in Mathematics, specializing in Probability Theory.',
           ),
         ],
       ),

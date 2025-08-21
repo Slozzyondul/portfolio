@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/about_screen.dart';
-import 'package:portfolio/screens/blog_screen.dart';
 import 'package:portfolio/screens/contact_screen.dart';
 import 'package:portfolio/screens/projects_screen.dart';
 import 'package:portfolio/screens/resume_screen.dart';
@@ -22,7 +21,6 @@ class _PortfolioScreenState extends State<PortfolioScreen>
     const AboutScreen(),
     const ResumeScreen(),
     const ProjectsScreen(),
-    const BlogScreen(),
     const ContactScreen(),
   ];
 
@@ -30,7 +28,6 @@ class _PortfolioScreenState extends State<PortfolioScreen>
     'About',
     'Resume',
     'Projects',
-    'Blog',
     'Contact',
   ];
 
@@ -38,7 +35,6 @@ class _PortfolioScreenState extends State<PortfolioScreen>
     Icons.person,
     Icons.description,
     Icons.work,
-    Icons.article,
     Icons.contact_mail,
   ];
 

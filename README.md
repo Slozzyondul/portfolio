@@ -9,7 +9,7 @@ This portfolio showcases my work as a Flutter developer, highlighting my project
 - **Home Page**: An interactive landing page with a modern UI.
 - **About Section**: A brief introduction about me and my journey in Flutter development.
 - **Projects**: A showcase of my best projects, including mobile and web applications.
-- **Blog**: A space where I share insights, tutorials, and experiences related to Flutter and software development.
+
 - **Contact Page**: Allows visitors to reach out to me directly via a contact form.
 - **Dark Mode Support**: A sleek dark-themed UI for better aesthetics and user experience.
 
