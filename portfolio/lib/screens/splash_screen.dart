@@ -153,6 +153,20 @@ class _SplashScreenState extends State<SplashScreen>
                         child: Image.asset(
                           'assets/images/solo.png',
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                color:
+                                    theme.colorScheme.primary.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Icon(
+                                Icons.person,
+                                color: theme.colorScheme.primary,
+                                size: 60,
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),

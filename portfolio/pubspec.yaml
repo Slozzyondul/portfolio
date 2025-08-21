@@ -21,8 +21,6 @@ dependencies:
   webview_flutter_wkwebview: ^3.18.4
   emailjs: ^4.0.0
 
- 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

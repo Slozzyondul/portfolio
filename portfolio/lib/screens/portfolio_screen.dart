@@ -192,12 +192,14 @@ class _PortfolioScreenState extends State<PortfolioScreen>
               child: SafeArea(
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(
                       _tabTitles.length,
-                      (index) => _buildMobileTab(index, theme),
+                      (index) => Flexible(
+                        child: _buildMobileTab(index, theme),
+                      ),
                     ),
                   ),
                 ),
@@ -255,7 +257,7 @@ class _PortfolioScreenState extends State<PortfolioScreen>
     return GestureDetector(
       onTap: () => _onTabChanged(index),
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: isSelected
@@ -268,15 +270,19 @@ class _PortfolioScreenState extends State<PortfolioScreen>
             Icon(
               _tabIcons[index],
               color: isSelected ? theme.colorScheme.primary : Colors.white70,
-              size: 20,
+              size: 18,
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2),
             Text(
               _tabTitles[index],
               style: theme.textTheme.bodySmall?.copyWith(
                 color: isSelected ? theme.colorScheme.primary : Colors.white70,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                fontSize: 10,
               ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
