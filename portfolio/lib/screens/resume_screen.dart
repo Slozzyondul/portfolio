@@ -56,8 +56,21 @@ class _ResumeScreenState extends State<ResumeScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isMobile = MediaQuery.of(context).size.width < 768;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isMobile = screenWidth < 768;
     final themeProvider = Provider.of<ThemeProvider>(context);
+
+    // Responsive padding based on screen size
+    final horizontalPadding = screenWidth < 400
+        ? 16.0
+        : screenWidth < 768
+            ? 20.0
+            : screenWidth < 1200
+                ? 24.0
+                : 32.0;
+
+    final verticalPadding = screenHeight < 600 ? 16.0 : 24.0;
 
     return Scaffold(
       body: Container(
@@ -85,11 +98,21 @@ class _ResumeScreenState extends State<ResumeScreen>
           opacity: _fadeAnimation,
           child: SlideTransition(
             position: _slideAnimation,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: isMobile
-                  ? _buildMobileLayout(theme)
-                  : _buildDesktopLayout(theme),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: screenWidth > 1400 ? 1200 : double.infinity,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: horizontalPadding,
+                    vertical: verticalPadding,
+                  ),
+                  child: isMobile
+                      ? _buildMobileLayout(theme)
+                      : _buildDesktopLayout(theme),
+                ),
+              ),
             ),
           ),
         ),
@@ -98,61 +121,95 @@ class _ResumeScreenState extends State<ResumeScreen>
   }
 
   Widget _buildMobileLayout(ThemeData theme) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final spacing = screenWidth < 400 ? 16.0 : 24.0;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _buildMobileHeader(theme),
-          const SizedBox(height: 24),
+          SizedBox(height: spacing),
           _buildExperienceSection(theme),
-          const SizedBox(height: 24),
+          SizedBox(height: spacing),
           _buildEducationSection(theme),
-          const SizedBox(height: 24),
+          SizedBox(height: spacing),
           _buildSkillsSection(theme),
+          SizedBox(height: spacing), // Extra bottom padding
         ],
       ),
     );
   }
 
   Widget _buildDesktopLayout(ThemeData theme) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Left Column
-        Expanded(
-          flex: 2,
-          child: Column(
-            children: [
-              _buildHeader(theme),
-              const SizedBox(height: 32),
-              _buildExperienceSection(theme),
-            ],
-          ),
-        ),
-        const SizedBox(width: 32),
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth >= 768 && screenWidth < 1200;
+    final spacing = isTablet ? 24.0 : 32.0;
 
-        // Right Column
-        Expanded(
-          flex: 1,
-          child: Column(
-            children: [
-              _buildEducationSection(theme),
-              const SizedBox(height: 32),
-              _buildSkillsSection(theme),
-            ],
-          ),
+    if (isTablet) {
+      // For tablets, use single column with better spacing
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildHeader(theme),
+            SizedBox(height: spacing),
+            _buildExperienceSection(theme),
+            SizedBox(height: spacing),
+            _buildEducationSection(theme),
+            SizedBox(height: spacing),
+            _buildSkillsSection(theme),
+          ],
         ),
-      ],
+      );
+    }
+
+    // For desktop, use two-column layout with proper constraints
+    return SingleChildScrollView(
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Left Column
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  _buildHeader(theme),
+                  SizedBox(height: spacing),
+                  _buildExperienceSection(theme),
+                ],
+              ),
+            ),
+            SizedBox(width: spacing),
+
+            // Right Column
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  _buildEducationSection(theme),
+                  SizedBox(height: spacing),
+                  _buildSkillsSection(theme),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   Widget _buildHeader(ThemeData theme) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isLargeScreen = screenWidth > 1200;
+    final padding = isLargeScreen ? 28.0 : 20.0;
+
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(padding),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -167,7 +224,7 @@ class _ResumeScreenState extends State<ResumeScreen>
                     theme.colorScheme.surface.withOpacity(0.9),
                   ],
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(isLargeScreen ? 24 : 20),
           border: Border.all(
             color: theme.colorScheme.primary.withOpacity(0.3),
             width: 1.5,
@@ -188,31 +245,39 @@ class _ResumeScreenState extends State<ResumeScreen>
           children: [
             Text(
               'Resume',
-              style: theme.textTheme.displaySmall?.copyWith(
+              style: (isLargeScreen
+                      ? theme.textTheme.displayMedium
+                      : theme.textTheme.displaySmall)
+                  ?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: isLargeScreen ? 20 : 16),
             Text(
               'Solomon Ondula Omusinde',
-              style: theme.textTheme.headlineMedium?.copyWith(
+              style: (isLargeScreen
+                      ? theme.textTheme.headlineLarge
+                      : theme.textTheme.headlineMedium)
+                  ?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: theme.colorScheme.primary,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: isLargeScreen ? 12 : 8),
             Text(
               'Flutter Developer',
               style: theme.textTheme.titleLarge?.copyWith(
                 color: theme.colorScheme.secondary,
                 letterSpacing: 1.5,
+                fontSize: isLargeScreen ? 18 : null,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: isLargeScreen ? 20 : 16),
             Text(
               'Passionate Flutter developer with expertise in cross-platform mobile and web development. Experienced in building scalable applications with modern development practices.',
               style: theme.textTheme.bodyLarge?.copyWith(
                 height: 1.6,
+                fontSize: isLargeScreen ? 17 : null,
               ),
             ),
           ],
@@ -223,8 +288,11 @@ class _ResumeScreenState extends State<ResumeScreen>
 
   Widget _buildMobileHeader(ThemeData theme) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final padding = screenWidth < 400 ? 16.0 : 20.0;
+
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: themeProvider.isDarkMode
             ? theme.colorScheme.surface.withOpacity(0.9)
@@ -288,8 +356,16 @@ class _ResumeScreenState extends State<ResumeScreen>
 
   Widget _buildExperienceSection(ThemeData theme) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isLargeScreen = screenWidth > 1200;
+    final padding = isLargeScreen
+        ? 28.0
+        : screenWidth < 768
+            ? 20.0
+            : 24.0;
+
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: themeProvider.isDarkMode
             ? theme.colorScheme.surface.withOpacity(0.9)
@@ -371,8 +447,15 @@ class _ResumeScreenState extends State<ResumeScreen>
     List<String> responsibilities,
   ) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final padding = screenWidth > 1200
+        ? 20.0
+        : screenWidth < 768
+            ? 12.0
+            : 16.0;
+
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: themeProvider.isDarkMode
             ? theme.colorScheme.surface.withOpacity(0.6)
@@ -469,8 +552,16 @@ class _ResumeScreenState extends State<ResumeScreen>
 
   Widget _buildEducationSection(ThemeData theme) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isLargeScreen = screenWidth > 1200;
+    final padding = isLargeScreen
+        ? 28.0
+        : screenWidth < 768
+            ? 20.0
+            : 24.0;
+
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: themeProvider.isDarkMode
             ? theme.colorScheme.surface.withOpacity(0.9)
@@ -531,8 +622,15 @@ class _ResumeScreenState extends State<ResumeScreen>
     String description,
   ) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final padding = screenWidth > 1200
+        ? 20.0
+        : screenWidth < 768
+            ? 12.0
+            : 16.0;
+
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: themeProvider.isDarkMode
             ? theme.colorScheme.surface.withOpacity(0.6)
@@ -609,8 +707,16 @@ class _ResumeScreenState extends State<ResumeScreen>
 
   Widget _buildSkillsSection(ThemeData theme) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isLargeScreen = screenWidth > 1200;
+    final padding = isLargeScreen
+        ? 28.0
+        : screenWidth < 768
+            ? 20.0
+            : 24.0;
+
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: themeProvider.isDarkMode
             ? theme.colorScheme.surface.withOpacity(0.9)
