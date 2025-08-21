@@ -12,8 +12,14 @@ class ProjectsScreen extends StatefulWidget {
 class _ProjectsScreenState extends State<ProjectsScreen> {
   final List<Map<String, String>> projects = [
     {
+      'title': 'Nairobi MTB - Orders Management',
+      'url': 'https://slozzyondula.pythonanywhere.com/',
+      'image': 'assets/images/python.jpeg'
+    },
+    {
       'title': 'Corruption Zii',
-      'url': 'https://slozzyondul.github.io/Social_Justice_and_Reform_Hackathon/',
+      'url':
+          'https://slozzyondul.github.io/Social_Justice_and_Reform_Hackathon/',
       'image': 'assets/images/corruption_zii.png'
     },
     {
@@ -26,7 +32,6 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
       'url': 'https://slozzyondul.github.io/music-app/',
       'image': 'assets/images/music_app.jpeg'
     },
-
     {
       'title': 'My Pocket Wallet',
       'url': 'https://slozzyondul.github.io/wallet/',
@@ -47,7 +52,6 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: LayoutBuilder(
@@ -92,7 +96,8 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                         children: [
                           Expanded(
                             child: ClipRRect(
-                              borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(15)),
                               child: Image.asset(
                                 projects[index]['image']!,
                                 fit: BoxFit.cover,
