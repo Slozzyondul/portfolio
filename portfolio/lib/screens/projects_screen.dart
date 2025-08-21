@@ -132,79 +132,120 @@ class _ProjectsScreenState extends State<ProjectsScreen>
     return Scaffold(
       body: FadeTransition(
         opacity: _fadeAnimation,
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
-              Text(
-                'My Projects',
-                style: theme.textTheme.displaySmall?.copyWith(
-                  fontWeight: FontWeight.bold,
+        child: LayoutBuilder(builder: (context, constraints) {
+          double screenWidth = constraints.maxWidth;
+          return Padding(
+            padding: EdgeInsets.all(screenWidth > 768 ? 24.0 : 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Header
+                Text(
+                  'My Projects',
+                  style: theme.textTheme.displaySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Here are some of the projects I\'ve worked on',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
+                const SizedBox(height: 8),
+                Text(
+                  'Here are some of the projects I\'ve worked on',
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: theme.colorScheme.onSurface.withOpacity(0.7),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 32),
+                const SizedBox(height: 32),
 
-              // Projects Grid
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    int crossAxisCount = constraints.maxWidth > 1200
-                        ? 3
-                        : constraints.maxWidth > 768
-                            ? 2
-                            : 1;
+                // Projects Grid
+                Expanded(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      double screenWidth = constraints.maxWidth;
+                      double screenHeight = constraints.maxHeight;
 
-                    return GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        crossAxisSpacing: 24,
-                        mainAxisSpacing: 24,
-                        childAspectRatio: 0.75,
-                      ),
-                      itemCount: projects.length,
-                      itemBuilder: (context, index) {
-                        return AnimatedBuilder(
-                          animation: _itemAnimations[index],
-                          builder: (context, child) {
-                            return Transform.scale(
-                              scale: _itemAnimations[index].value,
-                              child: _buildProjectCard(projects[index], theme),
-                            );
-                          },
-                        );
-                      },
-                    );
-                  },
+                      // Determine cross axis count based on screen width
+                      int crossAxisCount;
+                      if (screenWidth > 1400) {
+                        crossAxisCount = 4;
+                      } else if (screenWidth > 1200) {
+                        crossAxisCount = 3;
+                      } else if (screenWidth > 768) {
+                        crossAxisCount = 2;
+                      } else {
+                        crossAxisCount = 1;
+                      }
+
+                      // Calculate responsive spacing
+                      double spacing = screenWidth > 1200
+                          ? 32.0
+                          : screenWidth > 768
+                              ? 24.0
+                              : 16.0;
+
+                      // Calculate responsive aspect ratio
+                      double aspectRatio;
+                      if (screenWidth > 1400) {
+                        aspectRatio = 0.8; // Wider cards for large screens
+                      } else if (screenWidth > 1200) {
+                        aspectRatio = 0.75;
+                      } else if (screenWidth > 768) {
+                        aspectRatio = 0.7;
+                      } else {
+                        aspectRatio = 0.65; // Taller cards for mobile
+                      }
+
+                      return GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                          crossAxisSpacing: spacing,
+                          mainAxisSpacing: spacing,
+                          childAspectRatio: aspectRatio,
+                        ),
+                        itemCount: projects.length,
+                        itemBuilder: (context, index) {
+                          return AnimatedBuilder(
+                            animation: _itemAnimations[index],
+                            builder: (context, child) {
+                              return Transform.scale(
+                                scale: _itemAnimations[index].value,
+                                child: _buildProjectCard(
+                                  projects[index],
+                                  theme,
+                                  screenWidth,
+                                  screenHeight,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }
 
-  Widget _buildProjectCard(Map<String, dynamic> project, ThemeData theme) {
+  Widget _buildProjectCard(
+    Map<String, dynamic> project,
+    ThemeData theme,
+    double screenWidth,
+    double screenHeight,
+  ) {
     return OpenContainer(
-      closedElevation: 8,
+      closedElevation: screenWidth > 768 ? 8 : 6,
       closedShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(screenWidth > 768 ? 20 : 16),
       ),
       transitionDuration: const Duration(milliseconds: 500),
       openBuilder: (context, _) => _buildProjectDetail(project, theme),
       closedBuilder: (context, openContainer) => Container(
         decoration: BoxDecoration(
           color: theme.colorScheme.surface.withOpacity(0.8),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(screenWidth > 768 ? 20 : 16),
           border: Border.all(
             color: theme.colorScheme.primary.withOpacity(0.1),
             width: 1,
@@ -212,8 +253,8 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
+              blurRadius: screenWidth > 768 ? 20 : 16,
+              offset: Offset(0, screenWidth > 768 ? 10 : 8),
             ),
           ],
         ),
@@ -222,10 +263,11 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           children: [
             // Project Image
             Expanded(
-              flex: 3,
+              flex: screenWidth > 768 ? 3 : 2,
               child: ClipRRect(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(screenWidth > 768 ? 20 : 16),
+                ),
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
@@ -238,7 +280,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                           child: Icon(
                             Icons.image_not_supported,
                             color: theme.colorScheme.primary,
-                            size: 48,
+                            size: screenWidth > 768 ? 48 : 32,
                           ),
                         );
                       },
@@ -258,18 +300,26 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                     ),
                     // Category badge
                     Positioned(
-                      top: 16,
-                      right: 16,
+                      top: screenWidth > 768 ? 16 : 12,
+                      right: screenWidth > 768 ? 16 : 12,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 6),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth > 768 ? 12 : 8,
+                          vertical: screenWidth > 768 ? 6 : 4,
+                        ),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.primary.withOpacity(0.9),
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(
+                            screenWidth > 768 ? 20 : 16,
+                          ),
                         ),
                         child: Text(
                           project['category'],
-                          style: theme.textTheme.bodySmall?.copyWith(
+                          style: (screenWidth > 768
+                                  ? theme.textTheme.bodySmall
+                                  : theme.textTheme.bodySmall
+                                      ?.copyWith(fontSize: 10))
+                              ?.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
                           ),
@@ -283,47 +333,62 @@ class _ProjectsScreenState extends State<ProjectsScreen>
 
             // Project Info
             Expanded(
-              flex: 2,
+              flex: screenWidth > 768 ? 2 : 3,
               child: Padding(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(screenWidth > 768 ? 20 : 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       project['title'],
-                      style: theme.textTheme.headlineSmall?.copyWith(
+                      style: (screenWidth > 768
+                              ? theme.textTheme.headlineSmall
+                              : theme.textTheme.titleLarge)
+                          ?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
-                      maxLines: 2,
+                      maxLines: screenWidth > 768 ? 2 : 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: screenWidth > 768 ? 8 : 6),
                     Text(
                       project['description'],
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      style: (screenWidth > 768
+                              ? theme.textTheme.bodyMedium
+                              : theme.textTheme.bodySmall)
+                          ?.copyWith(
                         color: theme.colorScheme.onSurface.withOpacity(0.7),
                       ),
-                      maxLines: 2,
+                      maxLines: screenWidth > 768 ? 2 : 3,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 12),
 
                     // Tech stack
                     Wrap(
-                      spacing: 6,
-                      runSpacing: 6,
-                      children:
-                          (project['tech'] as List<String>).take(3).map((tech) {
+                      spacing: screenWidth > 768 ? 6 : 4,
+                      runSpacing: screenWidth > 768 ? 6 : 4,
+                      children: (project['tech'] as List<String>)
+                          .take(screenWidth > 768 ? 3 : 2)
+                          .map((tech) {
                         return Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 4),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 768 ? 8 : 6,
+                            vertical: screenWidth > 768 ? 4 : 3,
+                          ),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.primary.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(
+                              screenWidth > 768 ? 12 : 8,
+                            ),
                           ),
                           child: Text(
                             tech,
-                            style: theme.textTheme.bodySmall?.copyWith(
+                            style: (screenWidth > 768
+                                    ? theme.textTheme.bodySmall
+                                    : theme.textTheme.bodySmall
+                                        ?.copyWith(fontSize: 10))
+                                ?.copyWith(
                               color: theme.colorScheme.primary,
                               fontWeight: FontWeight.w500,
                             ),
@@ -340,20 +405,36 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                         Expanded(
                           child: ElevatedButton.icon(
                             onPressed: () => _launchURL(project['url']),
-                            icon: const Icon(Icons.open_in_new, size: 16),
-                            label: const Text('View Project'),
+                            icon: Icon(
+                              Icons.open_in_new,
+                              size: screenWidth > 768 ? 16 : 14,
+                            ),
+                            label: Text(
+                              screenWidth > 768 ? 'View Project' : 'View',
+                              style: TextStyle(
+                                fontSize: screenWidth > 768 ? null : 12,
+                              ),
+                            ),
                             style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              padding: EdgeInsets.symmetric(
+                                vertical: screenWidth > 768 ? 12 : 8,
+                              ),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: screenWidth > 768 ? 8 : 6),
                         IconButton(
                           onPressed: openContainer,
-                          icon: const Icon(Icons.info_outline),
+                          icon: Icon(
+                            Icons.info_outline,
+                            size: screenWidth > 768 ? 24 : 20,
+                          ),
                           style: IconButton.styleFrom(
                             backgroundColor: theme.colorScheme.surface,
                             foregroundColor: theme.colorScheme.primary,
+                            padding: EdgeInsets.all(
+                              screenWidth > 768 ? 8 : 6,
+                            ),
                           ),
                         ),
                       ],
