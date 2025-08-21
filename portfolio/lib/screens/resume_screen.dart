@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:portfolio/providers/theme_provider.dart';
 
 class ResumeScreen extends StatefulWidget {
   const ResumeScreen({super.key});

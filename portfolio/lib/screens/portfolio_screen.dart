@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:portfolio/screens/about_screen.dart';
 import 'package:portfolio/screens/contact_screen.dart';
 import 'package:portfolio/screens/projects_screen.dart';
 import 'package:portfolio/screens/resume_screen.dart';
+import 'package:portfolio/widgets/theme_toggle.dart';
+import 'package:portfolio/providers/theme_provider.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -69,6 +72,7 @@ class _PortfolioScreenState extends State<PortfolioScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isMobile = MediaQuery.of(context).size.width < 768;
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
       body: Container(
@@ -76,12 +80,19 @@ class _PortfolioScreenState extends State<PortfolioScreen>
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              const Color(0xFF0A0A0A),
-              const Color(0xFF1E1B4B),
-              const Color(0xFF312E81),
-              const Color(0xFF0A0A0A),
-            ],
+            colors: themeProvider.isDarkMode
+                ? [
+                    const Color(0xFF0A0A0A),
+                    const Color(0xFF1E1B4B),
+                    const Color(0xFF312E81),
+                    const Color(0xFF0A0A0A),
+                  ]
+                : [
+                    const Color(0xFFFAFAFA),
+                    const Color(0xFFE5E7EB),
+                    const Color(0xFFD1D5DB),
+                    const Color(0xFFFAFAFA),
+                  ],
             stops: const [0.0, 0.3, 0.7, 1.0],
           ),
         ),
@@ -245,6 +256,10 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                       ),
                     ),
                   ],
+
+                  // Theme Toggle
+                  const SizedBox(width: 16),
+                  const ThemeToggle(),
                 ],
               ),
             ),
@@ -279,13 +294,17 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(
-                        _tabTitles.length,
-                        (index) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: _buildMobileTab(index, theme),
+                      children: [
+                        ...List.generate(
+                          _tabTitles.length,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            child: _buildMobileTab(index, theme),
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 8),
+                        const ThemeToggle(),
+                      ],
                     ),
                   ),
                 ),
