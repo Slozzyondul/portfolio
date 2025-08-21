@@ -154,12 +154,56 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                   if (!isMobile) ...[
                     Expanded(
                       flex: 2,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          _tabTitles.length,
-                          (index) => _buildDesktopTab(index, theme),
-                        ),
+                      child: Stack(
+                        children: [
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: List.generate(
+                                _tabTitles.length,
+                                (index) => _buildDesktopTab(index, theme),
+                              ),
+                            ),
+                          ),
+                          // Gradient fade indicators
+                          Positioned(
+                            left: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: Container(
+                              width: 20,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [
+                                    Colors.black.withOpacity(0.1),
+                                    Colors.transparent,
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: Container(
+                              width: 20,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.centerRight,
+                                  end: Alignment.centerLeft,
+                                  colors: [
+                                    Colors.black.withOpacity(0.1),
+                                    Colors.transparent,
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -193,12 +237,16 @@ class _PortfolioScreenState extends State<PortfolioScreen>
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(
-                      _tabTitles.length,
-                      (index) => Flexible(
-                        child: _buildMobileTab(index, theme),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(
+                        _tabTitles.length,
+                        (index) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: _buildMobileTab(index, theme),
+                        ),
                       ),
                     ),
                   ),
