@@ -503,12 +503,34 @@ class _ProjectsScreenState extends State<ProjectsScreen>
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       backgroundColor: themeProvider.isDarkMode
-          ? theme.colorScheme.surface
-          : theme.colorScheme.surface,
+          ? const Color(0xFF0A0A0A)
+          : const Color(0xFFFAFAFA),
       appBar: AppBar(
-        title: Text(project['title']),
+        title: Text(
+          project['title'],
+          style: TextStyle(
+            color: themeProvider.isDarkMode
+                ? Colors.white
+                : const Color(0xFF1F2937),
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        iconTheme: IconThemeData(
+          color:
+              themeProvider.isDarkMode ? Colors.white : const Color(0xFF1F2937),
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: themeProvider.isDarkMode
+                ? Colors.white
+                : const Color(0xFF1F2937),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),

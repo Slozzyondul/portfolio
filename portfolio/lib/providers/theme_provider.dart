@@ -29,10 +29,21 @@ class ThemeProvider extends ChangeNotifier {
         onSurface: Color(0xFF1F2937),
         onBackground: Color(0xFF1F2937),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
+        titleTextStyle: const TextStyle(
+          color: Color(0xFF1F2937),
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+        iconTheme: const IconThemeData(
+          color: Color(0xFF1F2937),
+        ),
+        actionsIconTheme: const IconThemeData(
+          color: Color(0xFF1F2937),
+        ),
       ),
       cardTheme: CardThemeData(
         color: const Color(0xFFFFFFFF),
@@ -142,10 +153,21 @@ class ThemeProvider extends ChangeNotifier {
         onSurface: Colors.white,
         onBackground: Colors.white,
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle.light,
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        actionsIconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
       ),
       cardTheme: CardThemeData(
         color: const Color(0xFF1F1F1F),
