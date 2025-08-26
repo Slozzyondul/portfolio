@@ -88,12 +88,15 @@ class _AboutScreenState extends State<AboutScreen>
           opacity: _fadeAnimation,
           child: SlideTransition(
             position: _slideAnimation,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: isMobile
-                  ? _buildMobileLayout(theme)
-                  : _buildDesktopLayout(theme),
-            ),
+            child: isMobile
+                ? SingleChildScrollView(
+                    padding: const EdgeInsets.all(24.0),
+                    child: _buildMobileLayout(theme),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: _buildDesktopLayout(theme),
+                  ),
           ),
         ),
       ),
@@ -109,11 +112,7 @@ class _AboutScreenState extends State<AboutScreen>
         const SizedBox(height: 24),
 
         // Main Content
-        Expanded(
-          child: SingleChildScrollView(
-            child: _buildMainContent(theme),
-          ),
-        ),
+        _buildMainContent(theme),
       ],
     );
   }
