@@ -20,6 +20,15 @@ class _ProjectsScreenState extends State<ProjectsScreen>
 
   final List<Map<String, dynamic>> projects = [
     {
+      'title': 'Unique Decor & Lighting Events',
+      'description':
+          'Professional event planning and lighting services for weddings, corporate events, and celebrations in Nairobi.',
+      'url': 'https://slozzyondula01.pythonanywhere.com/',
+      'image': 'assets/images/flutter_development.jpeg',
+      'tech': ['Python', 'Django', 'Bootstrap', 'CSS3'],
+      'category': 'Event Services',
+    },
+    {
       'title': 'Nairobi MTB - Orders Management',
       'description':
           'A comprehensive order management system for Nairobi MTB with real-time tracking and analytics.',
@@ -283,27 +292,35 @@ class _ProjectsScreenState extends State<ProjectsScreen>
               end: Alignment.bottomRight,
               colors: themeProvider.isDarkMode
                   ? [
+                      theme.colorScheme.surface.withOpacity(0.95),
                       theme.colorScheme.surface.withOpacity(0.9),
                       theme.colorScheme.surface.withOpacity(0.85),
                     ]
                   : [
+                      Colors.white.withOpacity(0.98),
                       theme.colorScheme.surface.withOpacity(0.95),
                       theme.colorScheme.surface.withOpacity(0.9),
                     ],
             ),
-            borderRadius: BorderRadius.circular(screenWidth > 768 ? 20 : 16),
+            borderRadius: BorderRadius.circular(screenWidth > 768 ? 24 : 20),
             border: Border.all(
-              color: theme.colorScheme.primary.withOpacity(0.3),
-              width: 1.5,
+              color: theme.colorScheme.primary.withOpacity(0.2),
+              width: 1,
             ),
             boxShadow: [
               BoxShadow(
                 color: themeProvider.isDarkMode
-                    ? Colors.black.withOpacity(0.3)
-                    : Colors.black.withOpacity(0.1),
-                blurRadius: screenWidth > 768 ? 25 : 20,
-                offset: Offset(0, screenWidth > 768 ? 15 : 12),
-                spreadRadius: 2,
+                    ? Colors.black.withOpacity(0.4)
+                    : Colors.black.withOpacity(0.08),
+                blurRadius: screenWidth > 768 ? 30 : 25,
+                offset: Offset(0, screenWidth > 768 ? 20 : 15),
+                spreadRadius: 0,
+              ),
+              BoxShadow(
+                color: theme.colorScheme.primary.withOpacity(0.1),
+                blurRadius: screenWidth > 768 ? 15 : 10,
+                offset: Offset(0, screenWidth > 768 ? 8 : 5),
+                spreadRadius: 0,
               ),
             ],
           ),
@@ -315,7 +332,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                 flex: screenWidth > 768 ? 3 : 2,
                 child: ClipRRect(
                   borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(screenWidth > 768 ? 20 : 16),
+                    top: Radius.circular(screenWidth > 768 ? 24 : 20),
                   ),
                   child: Stack(
                     fit: StackFit.expand,
@@ -325,7 +342,16 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
-                            color: theme.colorScheme.surface.withOpacity(0.5),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  theme.colorScheme.primary.withOpacity(0.1),
+                                  theme.colorScheme.primary.withOpacity(0.05),
+                                ],
+                              ),
+                            ),
                             child: Icon(
                               Icons.image_not_supported,
                               color: theme.colorScheme.primary,
@@ -334,7 +360,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                           );
                         },
                       ),
-                      // Gradient overlay
+                      // Enhanced gradient overlay
                       Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -342,25 +368,43 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                             end: Alignment.bottomCenter,
                             colors: [
                               Colors.transparent,
-                              Colors.black.withOpacity(0.7),
+                              Colors.black.withOpacity(0.3),
+                              Colors.black.withOpacity(0.6),
+                              Colors.black.withOpacity(0.8),
                             ],
+                            stops: const [0.0, 0.4, 0.7, 1.0],
                           ),
                         ),
                       ),
-                      // Category badge
+                      // Enhanced category badge
                       Positioned(
                         top: screenWidth > 768 ? 16 : 12,
                         right: screenWidth > 768 ? 16 : 12,
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth > 768 ? 12 : 8,
-                            vertical: screenWidth > 768 ? 6 : 4,
+                            horizontal: screenWidth > 768 ? 14 : 10,
+                            vertical: screenWidth > 768 ? 8 : 6,
                           ),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.primary.withOpacity(0.9),
-                            borderRadius: BorderRadius.circular(
-                              screenWidth > 768 ? 20 : 16,
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                theme.colorScheme.primary.withOpacity(0.95),
+                                theme.colorScheme.primary.withOpacity(0.85),
+                              ],
                             ),
+                            borderRadius: BorderRadius.circular(
+                              screenWidth > 768 ? 24 : 20,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                                spreadRadius: 0,
+                              ),
+                            ],
                           ),
                           child: Text(
                             project['category'],
@@ -370,7 +414,8 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                                         ?.copyWith(fontSize: 10))
                                 ?.copyWith(
                               color: Colors.white,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.5,
                             ),
                           ),
                         ),
@@ -413,22 +458,34 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                       ),
                       const SizedBox(height: 12),
 
-                      // Tech stack
+                      // Enhanced tech stack
                       Wrap(
-                        spacing: screenWidth > 768 ? 6 : 4,
-                        runSpacing: screenWidth > 768 ? 6 : 4,
+                        spacing: screenWidth > 768 ? 8 : 6,
+                        runSpacing: screenWidth > 768 ? 8 : 6,
                         children: (project['tech'] as List<String>)
                             .take(screenWidth > 768 ? 3 : 2)
                             .map((tech) {
                           return Container(
                             padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth > 768 ? 8 : 6,
-                              vertical: screenWidth > 768 ? 4 : 3,
+                              horizontal: screenWidth > 768 ? 10 : 8,
+                              vertical: screenWidth > 768 ? 6 : 4,
                             ),
                             decoration: BoxDecoration(
-                              color: theme.colorScheme.primary.withOpacity(0.1),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  theme.colorScheme.primary.withOpacity(0.15),
+                                  theme.colorScheme.primary.withOpacity(0.08),
+                                ],
+                              ),
                               borderRadius: BorderRadius.circular(
-                                screenWidth > 768 ? 12 : 8,
+                                screenWidth > 768 ? 16 : 12,
+                              ),
+                              border: Border.all(
+                                color:
+                                    theme.colorScheme.primary.withOpacity(0.2),
+                                width: 1,
                               ),
                             ),
                             child: Text(
@@ -439,7 +496,8 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                                           ?.copyWith(fontSize: 10))
                                   ?.copyWith(
                                 color: theme.colorScheme.primary,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.3,
                               ),
                             ),
                           );
@@ -448,41 +506,109 @@ class _ProjectsScreenState extends State<ProjectsScreen>
 
                       const Spacer(),
 
-                      // Action buttons
+                      // Enhanced action buttons
                       Row(
                         children: [
                           Expanded(
-                            child: ElevatedButton.icon(
-                              onPressed: () => _launchURL(project['url']),
-                              icon: Icon(
-                                Icons.open_in_new,
-                                size: screenWidth > 768 ? 16 : 14,
-                              ),
-                              label: Text(
-                                screenWidth > 768 ? 'View Project' : 'View',
-                                style: TextStyle(
-                                  fontSize: screenWidth > 768 ? null : 12,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    theme.colorScheme.primary,
+                                    theme.colorScheme.primary.withOpacity(0.8),
+                                  ],
                                 ),
+                                borderRadius: BorderRadius.circular(
+                                  screenWidth > 768 ? 16 : 12,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: theme.colorScheme.primary
+                                        .withOpacity(0.3),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 4),
+                                    spreadRadius: 0,
+                                  ),
+                                ],
                               ),
-                              style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: screenWidth > 768 ? 12 : 8,
+                              child: ElevatedButton.icon(
+                                onPressed: () => _launchURL(project['url']),
+                                icon: Icon(
+                                  Icons.open_in_new,
+                                  size: screenWidth > 768 ? 18 : 16,
+                                  color: Colors.white,
+                                ),
+                                label: Text(
+                                  screenWidth > 768 ? 'View Project' : 'View',
+                                  style: TextStyle(
+                                    fontSize: screenWidth > 768 ? 14 : 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.transparent,
+                                  shadowColor: Colors.transparent,
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: screenWidth > 768 ? 14 : 10,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      screenWidth > 768 ? 16 : 12,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(width: screenWidth > 768 ? 8 : 6),
-                          IconButton(
-                            onPressed: openContainer,
-                            icon: Icon(
-                              Icons.info_outline,
-                              size: screenWidth > 768 ? 24 : 20,
+                          SizedBox(width: screenWidth > 768 ? 12 : 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  theme.colorScheme.surface,
+                                  theme.colorScheme.surface.withOpacity(0.9),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                screenWidth > 768 ? 16 : 12,
+                              ),
+                              border: Border.all(
+                                color:
+                                    theme.colorScheme.primary.withOpacity(0.3),
+                                width: 1.5,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: theme.colorScheme.primary
+                                      .withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 3),
+                                  spreadRadius: 0,
+                                ),
+                              ],
                             ),
-                            style: IconButton.styleFrom(
-                              backgroundColor: theme.colorScheme.surface,
-                              foregroundColor: theme.colorScheme.primary,
-                              padding: EdgeInsets.all(
-                                screenWidth > 768 ? 8 : 6,
+                            child: IconButton(
+                              onPressed: openContainer,
+                              icon: Icon(
+                                Icons.info_outline,
+                                size: screenWidth > 768 ? 24 : 20,
+                                color: theme.colorScheme.primary,
+                              ),
+                              style: IconButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                padding: EdgeInsets.all(
+                                  screenWidth > 768 ? 10 : 8,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    screenWidth > 768 ? 16 : 12,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
