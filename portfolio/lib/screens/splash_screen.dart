@@ -222,7 +222,7 @@ class _SplashScreenState extends State<SplashScreen>
                       return Opacity(
                         opacity: _fadeAnimation.value,
                         child: Text(
-                          'Flutter Developer',
+                          'Software Developer',
                           style: theme.textTheme.titleLarge?.copyWith(
                             color: theme.colorScheme.secondary,
                             letterSpacing: 2,
