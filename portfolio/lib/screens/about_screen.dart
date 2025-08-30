@@ -225,7 +225,7 @@ class _AboutScreenState extends State<AboutScreen>
           ),
           const SizedBox(height: 8),
           Text(
-            'Flutter Developer',
+            'Software Developer',
             style: theme.textTheme.titleLarge?.copyWith(
               color: theme.colorScheme.secondary,
               letterSpacing: 1.5,
@@ -349,7 +349,7 @@ class _AboutScreenState extends State<AboutScreen>
           ),
           const SizedBox(height: 8),
           Text(
-            'Flutter Developer',
+            'Software Developer',
             style: theme.textTheme.titleLarge?.copyWith(
               color: theme.colorScheme.secondary,
               letterSpacing: 1.5,
@@ -432,7 +432,7 @@ class _AboutScreenState extends State<AboutScreen>
             ],
           ),
           child: Text(
-            'A passionate Flutter developer with strong expertise in cross-platform applications. I specialize in creating beautiful, performant, and user-friendly mobile and web applications using modern development practices and cutting-edge technologies.',
+            'A passionate software developer with strong expertise in cross-platform applications. I specialize in creating beautiful, performant, and user-friendly mobile and web applications using modern development practices and cutting-edge technologies.',
             style: theme.textTheme.bodyLarge?.copyWith(
               height: 1.6,
             ),
