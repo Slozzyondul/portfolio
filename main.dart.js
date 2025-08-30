@@ -78962,7 +78962,7 @@ l=a.ok
 p=l.e
 p=A.aD("Solomon Ondula Omusinde",j,j,j,p==null?j:p.dU(B.I),B.aM,j)
 l=l.r
-return A.aR(j,A.c_(A.b([m,B.eV,p,B.aZ,A.aD("Flutter Developer",j,j,j,l==null?j:l.rq(r.y,1.5),j,j),B.cu,new A.eo(B.fT,"solomonondula@gmail.com",new A.abW(k),j),B.aZ,new A.eo(B.jD,"+254 792352745",new A.abX(k),j),B.aZ,new A.eo(B.jC,"Nairobi, Kenya",j,j),B.c6,new A.eo(B.eo,"LinkedIn Profile",new A.abY(k),j)],t.p),B.D,B.u,B.v),B.m,j,j,new A.aA(j,j,o,q,n,new A.bX(B.Y,B.ao,B.L,i,j,j),B.t),j,j,j,B.ei,j,j,j)},
+return A.aR(j,A.c_(A.b([m,B.eV,p,B.aZ,A.aD("Software Developer",j,j,j,l==null?j:l.rq(r.y,1.5),j,j),B.cu,new A.eo(B.fT,"solomonondula@gmail.com",new A.abW(k),j),B.aZ,new A.eo(B.jD,"+254 792352745",new A.abX(k),j),B.aZ,new A.eo(B.jC,"Nairobi, Kenya",j,j),B.c6,new A.eo(B.eo,"LinkedIn Profile",new A.abY(k),j)],t.p),B.D,B.u,B.v),B.m,j,j,new A.aA(j,j,o,q,n,new A.bX(B.Y,B.ao,B.L,i,j,j),B.t),j,j,j,B.ei,j,j,j)},
 a_L(a){var s,r,q,p,o,n,m,l,k=this,j=null,i=k.c
 i.toString
 s=A.d5(i,!0,t.A)
@@ -78983,7 +78983,7 @@ l=a.ok
 p=l.e
 p=A.aD("Solomon Ondula Omusinde",j,j,j,p==null?j:p.dU(B.I),B.aM,j)
 l=l.r
-return A.aR(j,A.c_(A.b([m,B.eV,p,B.aZ,A.aD("Flutter Developer",j,j,j,l==null?j:l.rq(r.y,1.5),B.aM,j),B.cu,new A.eo(B.fT,"solomonondula@gmail.com",new A.abS(k),j),B.aZ,new A.eo(B.jD,"+254 792352745",new A.abT(k),j),B.aZ,new A.eo(B.jC,"Nairobi, Kenya",j,j),B.c6,new A.eo(B.eo,"LinkedIn Profile",new A.abU(k),j)],t.p),B.D,B.u,B.v),B.m,j,j,new A.aA(j,j,o,q,n,new A.bX(B.Y,B.ao,B.L,i,j,j),B.t),j,j,j,B.ei,j,j,j)},
+return A.aR(j,A.c_(A.b([m,B.eV,p,B.aZ,A.aD("Software Developer",j,j,j,l==null?j:l.rq(r.y,1.5),B.aM,j),B.cu,new A.eo(B.fT,"solomonondula@gmail.com",new A.abS(k),j),B.aZ,new A.eo(B.jD,"+254 792352745",new A.abT(k),j),B.aZ,new A.eo(B.jC,"Nairobi, Kenya",j,j),B.c6,new A.eo(B.eo,"LinkedIn Profile",new A.abU(k),j)],t.p),B.D,B.u,B.v),B.m,j,j,new A.aA(j,j,o,q,n,new A.bX(B.Y,B.ao,B.L,i,j,j),B.t),j,j,j,B.ei,j,j,j)},
 IZ(a){var s,r,q,p,o,n,m,l,k=null,j=this.c
 j.toString
 s=A.d5(j,!0,t.A)
@@ -78999,7 +78999,7 @@ m=A.b0(16)
 n=A.cs(n.b.a7(0.2),1)
 l=A.b([new A.bu(0,B.Z,s.a?A.I(51,B.e.m()>>>16&255,B.e.m()>>>8&255,B.e.m()&255):A.I(13,B.e.m()>>>16&255,B.e.m()>>>8&255,B.e.m()&255),B.hf,10)],t.V)
 j=j.y
-j=A.aR(k,A.aD("A passionate Flutter developer with strong expertise in cross-platform applications. I specialize in creating beautiful, performant, and user-friendly mobile and web applications using modern development practices and cutting-edge technologies.",k,k,k,j==null?k:j.my(1.6),k,k),B.m,k,k,new A.aA(k,k,n,m,l,new A.bX(B.Y,B.ao,B.L,o,k,k),B.t),k,k,k,B.j1,k,k,k)
+j=A.aR(k,A.aD("A passionate software developer with strong expertise in cross-platform applications. I specialize in creating beautiful, performant, and user-friendly mobile and web applications using modern development practices and cutting-edge technologies.",k,k,k,j==null?k:j.my(1.6),k,k),B.m,k,k,new A.aA(k,k,n,m,l,new A.bX(B.Y,B.ao,B.L,o,k,k),B.t),k,k,k,B.j1,k,k,k)
 o=A.aD("What I'm Doing",k,k,k,q?k:r.dU(B.I),k,k)
 n=t.p
 m=A.M3(A.b([new A.m9("Mobile Apps","Professional development of applications for Android and iOS using Flutter framework.",B.E9,k),new A.m9("Web Development","High-quality development of responsive web applications and progressive web apps.",B.Eg,k),new A.m9("UI/UX Design","Modern and intuitive user interface design with focus on user experience.",B.E4,k),new A.m9("Backend Development","High-performance backend services and APIs designed for scalability.",B.Ee,k)],n),16,16)
@@ -80092,7 +80092,7 @@ p===$&&A.a()
 p=p.b.a8(p.a.gu())
 s=this.b
 r=s.ok.r
-return A.IZ(A.aD("Flutter Developer",q,q,q,r==null?q:r.rq(s.ax.y,2),q,q),p)},
+return A.IZ(A.aD("Software Developer",q,q,q,r==null?q:r.rq(s.ax.y,2),q,q),p)},
 $S:91}
 A.ajA.prototype={
 $2(a,b){var s,r=null,q=this.a.x
