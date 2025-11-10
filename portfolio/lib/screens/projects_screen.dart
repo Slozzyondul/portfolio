@@ -20,10 +20,10 @@ class _ProjectsScreenState extends State<ProjectsScreen>
 
   final List<Map<String, dynamic>> projects = [
     {
-      'title': 'Unique Decor & Lighting Events',
+      'title': 'Ambient Atelier',
       'description':
           'Professional event planning and lighting services for weddings, corporate events, and celebrations in Nairobi.',
-      'url': 'https://slozzyondula01.pythonanywhere.com/',
+      'url': 'https://www.ambientatelier.co.ke/',
       'image': 'assets/images/flutter_development.jpeg',
       'tech': ['Python', 'Django', 'Bootstrap', 'CSS3'],
       'category': 'Event Services',
