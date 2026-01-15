@@ -20,6 +20,15 @@ class _ProjectsScreenState extends State<ProjectsScreen>
 
   final List<Map<String, dynamic>> projects = [
     {
+      'title': 'Devotional',
+      'description':
+          'A digital sanctuary for worship, featuring weekly sessions, Bible study videos, and inspirational spiritual content.',
+      'url': 'https://slozzyondul.github.io/devotion/',
+      'image': 'assets/images/devotion.png',
+      'tech': ['Flutter', 'Dart', 'GitHub Pages'],
+      'category': 'Digital Ministry',
+    },
+    {
       'title': 'Ambient Atelier',
       'description':
           'Professional event planning and lighting services for weddings, corporate events, and celebrations in Nairobi.',
