@@ -20,6 +20,15 @@ class _ProjectsScreenState extends State<ProjectsScreen>
 
   final List<Map<String, dynamic>> projects = [
     {
+      'title': 'Ngando Preparatory Schools',
+      'description':
+          'A comprehensive educational platform for Ngando Preparatory Schools, featuring academic program details, character development values, and an interactive donation portal.',
+      'url': 'https://ngandopreparatoryschools.org/',
+      'image': 'assets/images/ngando_school.png',
+      'tech': ['Python', 'Django', 'Bootstrap', 'JavaScript'],
+      'category': 'Education Platform',
+    },
+    {
       'title': 'Devotional',
       'description':
           'A digital sanctuary for worship, featuring weekly sessions, Bible study videos, and inspirational spiritual content.',
