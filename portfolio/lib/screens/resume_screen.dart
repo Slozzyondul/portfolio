@@ -422,6 +422,20 @@ class _ResumeScreenState extends State<ResumeScreen>
           const SizedBox(height: 20),
           _buildExperienceItem(
             theme,
+            'Assistant Module Coordinator & Software Developer',
+            'Power Learn Project',
+            'Jan 2024 - Jan 2025',
+            [
+              'Mastered full-stack software development with a specialization in mobile app development',
+              'Developed several backend and full-stack projects using Django and Node.js',
+              'Served as an Assistant Module Coordinator (since Sep 2024), guiding and mentoring learners',
+              'Provided technical support by helping learners debug code and resolving technical queries',
+              'Managed module delivery and ensured smooth learning experiences for participants',
+            ],
+          ),
+          const SizedBox(height: 20),
+          _buildExperienceItem(
+            theme,
             'Full Stack Web Developer',
             'Ngando Preparatory Schools',
             'Nov 2025 - Present',
