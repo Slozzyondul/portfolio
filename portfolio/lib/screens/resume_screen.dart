@@ -651,6 +651,14 @@ class _ResumeScreenState extends State<ResumeScreen>
             'Sep 2016 - Sep 2023',
             'Graduated with honors in Mathematics, specializing in Probability Theory.',
           ),
+          const SizedBox(height: 20),
+          _buildEducationItem(
+            theme,
+            'Kenya Certificate of Secondary Education (KCSE)',
+            'The Aga Khan High School, Nairobi',
+            'Jan 2012 - Nov 2015',
+            'Successfully completed secondary education with a mean grade of B+.',
+          ),
         ],
       ),
     );
