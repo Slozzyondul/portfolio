@@ -298,93 +298,95 @@ class _AboutScreenState extends State<AboutScreen>
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Profile Image
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: theme.colorScheme.primary.withOpacity(0.3),
-                width: 3,
-              ),
-              boxShadow: [
-                BoxShadow(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Profile Image
+            Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
                   color: theme.colorScheme.primary.withOpacity(0.3),
-                  blurRadius: 20,
-                  spreadRadius: 5,
+                  width: 3,
                 ),
-              ],
-            ),
-            child: ClipOval(
-              child: Image.asset(
-                'assets/images/logo.JPG',
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.primary.withOpacity(0.1),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.person,
-                      color: theme.colorScheme.primary,
-                      size: 60,
-                    ),
-                  );
-                },
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.colorScheme.primary.withOpacity(0.3),
+                    blurRadius: 20,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/images/logo.JPG',
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        color: theme.colorScheme.primary,
+                        size: 60,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-          // Name and Title
-          Text(
-            'Solomon Ondula Omusinde',
-            style: theme.textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
+            // Name and Title
+            Text(
+              'Solomon Ondula Omusinde',
+              style: theme.textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Software Developer',
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: theme.colorScheme.secondary,
-              letterSpacing: 1.5,
+            const SizedBox(height: 8),
+            Text(
+              'Software Developer',
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: theme.colorScheme.secondary,
+                letterSpacing: 1.5,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
+            const SizedBox(height: 24),
 
-          // Contact Information
-          ContactInfo(
-            icon: Icons.email,
-            text: 'solomonondula@gmail.com',
-            onTap: () => _launchEmail('solomonondula@gmail.com'),
-          ),
-          const SizedBox(height: 8),
-          ContactInfo(
-            icon: Icons.phone,
-            text: '+254 792352745',
-            onTap: () => _launchPhone('+254792352745'),
-          ),
-          const SizedBox(height: 8),
-          ContactInfo(
-            icon: Icons.location_on,
-            text: 'Nairobi, Kenya',
-          ),
-          const SizedBox(height: 16),
-          ContactInfo(
-            icon: Icons.link,
-            text: "LinkedIn Profile",
-            onTap: () => _launchURL(
-                'https://www.linkedin.com/in/solomon-ondula-4993471a7/'),
-          ),
-        ],
+            // Contact Information
+            ContactInfo(
+              icon: Icons.email,
+              text: 'solomonondula@gmail.com',
+              onTap: () => _launchEmail('solomonondula@gmail.com'),
+            ),
+            const SizedBox(height: 8),
+            ContactInfo(
+              icon: Icons.phone,
+              text: '+254 792352745',
+              onTap: () => _launchPhone('+254792352745'),
+            ),
+            const SizedBox(height: 8),
+            ContactInfo(
+              icon: Icons.location_on,
+              text: 'Nairobi, Kenya',
+            ),
+            const SizedBox(height: 16),
+            ContactInfo(
+              icon: Icons.link,
+              text: "LinkedIn Profile",
+              onTap: () => _launchURL(
+                  'https://www.linkedin.com/in/solomon-ondula-4993471a7/'),
+            ),
+          ],
+        ),
       ),
     );
   }

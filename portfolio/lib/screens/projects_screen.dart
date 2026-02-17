@@ -268,8 +268,29 @@ class _ProjectsScreenState extends State<ProjectsScreen>
       ),
     );
   }
+}
 
-  Widget _buildProjectDetail(Map<String, dynamic> project, ThemeData theme) {
+class ProjectDetailScreen extends StatelessWidget {
+  final Map<String, dynamic> project;
+
+  const ProjectDetailScreen({super.key, required this.project});
+
+  void _launchURL(String url, BuildContext context) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not launch $url')),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -345,19 +366,22 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    project['image'],
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: theme.colorScheme.surface.withOpacity(0.5),
-                        child: Icon(
-                          Icons.image_not_supported,
-                          color: theme.colorScheme.primary,
-                          size: 64,
-                        ),
-                      );
-                    },
+                  child: Hero(
+                    tag: 'project_${project['title']}',
+                    child: Image.asset(
+                      project['image'],
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: theme.colorScheme.surface.withOpacity(0.5),
+                          child: Icon(
+                            Icons.image_not_supported,
+                            color: theme.colorScheme.primary,
+                            size: 64,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -445,7 +469,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  onPressed: () => _launchURL(project['url']),
+                  onPressed: () => _launchURL(project['url'], context),
                   icon: const Icon(Icons.open_in_new),
                   label: const Text('View Live Project'),
                   style: ElevatedButton.styleFrom(
@@ -496,7 +520,7 @@ class _ProjectCardState extends State<_ProjectCard> {
           ),
           transitionDuration: const Duration(milliseconds: 500),
           openBuilder: (context, _) =>
-              _ProjectsScreenState()._buildProjectDetail(widget.project, theme),
+              ProjectDetailScreen(project: widget.project),
           closedBuilder: (context, openContainer) {
             return Container(
               decoration: BoxDecoration(
