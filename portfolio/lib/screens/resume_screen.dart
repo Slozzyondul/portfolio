@@ -808,17 +808,17 @@ class _ResumeScreenState extends State<ResumeScreen>
           ),
           const SizedBox(height: 24),
           _buildSkillCategory(theme, 'Programming Languages',
-              ['Dart', 'Python', 'JavaScript', 'Go', 'Rust', 'SQL', 'Flask']),
+              ['Dart', 'Python', 'JavaScript', 'Go', 'Rust', 'SQL']),
           const SizedBox(height: 16),
           _buildSkillCategory(theme, 'Frameworks & Tools', [
             'Flutter',
+            'Flask',
             'Django',
             'Supabase',
             'Firebase',
             'Git',
             'Linux',
             'Docker',
-            'Solutions Architect'
           ]),
           const SizedBox(height: 16),
           _buildSkillCategory(theme, 'Soft Skills', [
