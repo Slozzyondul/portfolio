@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/screens/about_screen.dart';
@@ -115,6 +116,9 @@ class _PortfolioScreenState extends State<PortfolioScreen>
               ),
               child: Row(
                 children: [
+                  if (isMobile)
+                    const SizedBox(
+                        width: 50), // Spacer to balance ThemeToggle width
                   // Logo/Name
                   Expanded(
                     child: isMobile
@@ -277,34 +281,46 @@ class _PortfolioScreenState extends State<PortfolioScreen>
       // Mobile Bottom Navigation
       bottomNavigationBar: isMobile
           ? Container(
+              margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.9),
-                border: Border(
-                  top: BorderSide(
-                    color: theme.colorScheme.primary.withOpacity(0.2),
-                    width: 1,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
                   ),
-                ),
+                ],
               ),
-              child: SafeArea(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ...List.generate(
-                          _tabTitles.length,
-                          (index) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4),
-                            child: _buildMobileTab(index, theme),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                    decoration: BoxDecoration(
+                      color: themeProvider.isDarkMode
+                          ? Colors.black.withOpacity(0.7)
+                          : Colors.white.withOpacity(0.7),
+                      border: Border.all(
+                        color: theme.colorScheme.primary.withOpacity(0.2),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: SafeArea(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ...List.generate(
+                            _tabTitles.length,
+                            (index) => _buildMobileTab(index, theme),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        const ThemeToggle(),
-                      ],
+                          const ThemeToggle(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -358,15 +374,20 @@ class _PortfolioScreenState extends State<PortfolioScreen>
 
   Widget _buildMobileTab(int index, ThemeData theme) {
     final isSelected = _selectedIndex == index;
+    final color = isSelected
+        ? theme.colorScheme.primary
+        : theme.textTheme.bodySmall?.color?.withOpacity(0.6) ?? Colors.grey;
 
     return GestureDetector(
       onTap: () => _onTabChanged(index),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           color: isSelected
-              ? theme.colorScheme.primary.withOpacity(0.2)
+              ? theme.colorScheme.primary.withOpacity(0.15)
               : Colors.transparent,
         ),
         child: Column(
@@ -374,21 +395,29 @@ class _PortfolioScreenState extends State<PortfolioScreen>
           children: [
             Icon(
               _tabIcons[index],
-              color: isSelected ? theme.colorScheme.primary : Colors.white70,
-              size: 18,
+              color: color,
+              size: 22,
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 4),
             Text(
               _tabTitles[index],
               style: theme.textTheme.bodySmall?.copyWith(
-                color: isSelected ? theme.colorScheme.primary : Colors.white70,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                color: color,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 fontSize: 10,
               ),
               textAlign: TextAlign.center,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
+            if (isSelected)
+              Container(
+                margin: const EdgeInsets.only(top: 4),
+                height: 4,
+                width: 4,
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primary,
+                  shape: BoxShape.circle,
+                ),
+              ),
           ],
         ),
       ),
