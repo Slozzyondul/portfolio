@@ -226,7 +226,7 @@ class _AboutScreenState extends State<AboutScreen>
             ),
             const SizedBox(height: 8),
             Text(
-              'Software Developer',
+              'Software Architect',
               style: theme.textTheme.titleLarge?.copyWith(
                 color: theme.colorScheme.secondary,
                 letterSpacing: 1.5,
@@ -352,7 +352,7 @@ class _AboutScreenState extends State<AboutScreen>
             ),
             const SizedBox(height: 8),
             Text(
-              'Software Developer',
+              'Software Architect',
               style: theme.textTheme.titleLarge?.copyWith(
                 color: theme.colorScheme.secondary,
                 letterSpacing: 1.5,
@@ -436,7 +436,7 @@ class _AboutScreenState extends State<AboutScreen>
             ],
           ),
           child: Text(
-            'A passionate software developer with strong expertise in cross-platform applications. I specialize in creating beautiful, performant, and user-friendly mobile and web applications using modern development practices and cutting-edge technologies.',
+            'Strategic Software Architect dedicated to engineering robust, scalable, and high-performance cross-platform solutions. I specialize in system design, defining technical architecture, and leading the development of complex mobile and web ecosystems using state-of-the-art technologies and industry-standard patterns.',
             style: theme.textTheme.bodyLarge?.copyWith(
               height: 1.6,
             ),
@@ -457,27 +457,27 @@ class _AboutScreenState extends State<AboutScreen>
           runSpacing: 16,
           children: [
             ServiceCard(
-              title: 'Mobile Apps',
+              title: 'Mobile Architecture',
               subtitle:
-                  'Professional development of applications for Android and iOS using Flutter framework.',
+                  'High-level design and engineering of distributed mobile ecosystems using the Flutter framework.',
               icon: Icons.mobile_friendly,
             ),
             ServiceCard(
-              title: 'Web Development',
+              title: 'Enterprise Web',
               subtitle:
-                  'High-quality development of responsive web applications and progressive web apps.',
+                  'Architecting scalable, high-performance web systems and progressive web applications.',
               icon: Icons.web,
             ),
             ServiceCard(
-              title: 'UI/UX Design',
+              title: 'System Design',
               subtitle:
-                  'Modern and intuitive user interface design with focus on user experience.',
+                  'Crafting intuitive user-centric interfaces and system workflows with architectural precision.',
               icon: Icons.design_services,
             ),
             ServiceCard(
-              title: 'Backend Development',
+              title: 'Distributed Backends',
               subtitle:
-                  'High-performance backend services and APIs designed for scalability.',
+                  'Engineering resilient cloud-native architectures and secure APIs designed for massive scale.',
               icon: Icons.storage,
             ),
           ],
