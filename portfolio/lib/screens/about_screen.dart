@@ -534,6 +534,11 @@ class _AboutScreenState extends State<AboutScreen>
         'image': 'assets/images/javascript.png',
         'url': 'https://www.javascript.com/'
       },
+      {
+        'name': 'Rust',
+        'image': 'assets/images/rust.png',
+        'url': 'https://www.rust-lang.org/'
+      },
       {'name': 'Go', 'image': 'assets/images/go.png', 'url': 'https://go.dev/'},
     ];
 
