@@ -659,6 +659,14 @@ class _ResumeScreenState extends State<ResumeScreen>
             'Jan 2012 - Nov 2015',
             'Successfully completed secondary education with a mean grade of B+.',
           ),
+          const SizedBox(height: 20),
+          _buildEducationItem(
+            theme,
+            'Kenya Certificate of Primary Education (KCPE)',
+            'Sifa Children Centre, Nairobi',
+            'Jan 2006 - Nov 2011',
+            'Successfully completed primary education with a mean score of 343 marks (B+).',
+          ),
         ],
       ),
     );
