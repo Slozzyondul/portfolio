@@ -20,6 +20,15 @@ class _ProjectsScreenState extends State<ProjectsScreen>
 
   final List<Map<String, dynamic>> projects = [
     {
+      'title': 'Genjomu Construction',
+      'description':
+          'A professional corporate website for Genjomu Construction company, featuring their service portfolio, completed projects, and business expertise.',
+      'url': 'https://genjomuconstruction.co.ke/',
+      'image': 'assets/images/genjomu.png',
+      'tech': ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+      'category': 'Business Website',
+    },
+    {
       'title': 'Ngando Preparatory Schools',
       'description':
           'A comprehensive educational platform for Ngando Preparatory Schools, featuring academic program details, character development values, and an interactive donation portal.',
@@ -28,6 +37,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
       'tech': ['Python', 'Django', 'Bootstrap', 'JavaScript'],
       'category': 'Education Platform',
     },
+
     {
       'title': 'Devotional',
       'description':
