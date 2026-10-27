@@ -530,6 +530,11 @@ class _AboutScreenState extends State<AboutScreen>
         'url': 'https://git-scm.com/'
       },
       {
+        'name': 'Postman',
+        'image': 'assets/images/postman.png',
+        'url': 'https://www.postman.com/'
+      },
+      {
         'name': 'JavaScript',
         'image': 'assets/images/javascript.png',
         'url': 'https://www.javascript.com/'
