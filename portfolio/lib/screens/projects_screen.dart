@@ -37,7 +37,6 @@ class _ProjectsScreenState extends State<ProjectsScreen>
       'tech': ['Python', 'Django', 'Bootstrap', 'JavaScript'],
       'category': 'Education Platform',
     },
-
     {
       'title': 'Devotional',
       'description':
@@ -46,24 +45,6 @@ class _ProjectsScreenState extends State<ProjectsScreen>
       'image': 'assets/images/devotion.png',
       'tech': ['Flutter', 'Dart', 'GitHub Pages'],
       'category': 'Digital Ministry',
-    },
-    {
-      'title': 'Ambient Atelier',
-      'description':
-          'Professional event planning and lighting services for weddings, corporate events, and celebrations in Nairobi.',
-      'url': 'https://www.ambientatelier.co.ke/',
-      'image': 'assets/images/flutter_development.jpeg',
-      'tech': ['Python', 'Django', 'Bootstrap', 'CSS3'],
-      'category': 'Event Services',
-    },
-    {
-      'title': 'Nairobi MTB - Orders Management',
-      'description':
-          'A comprehensive order management system for Nairobi MTB with real-time tracking and analytics.',
-      'url': 'https://slozzyondula.pythonanywhere.com/',
-      'image': 'assets/images/python.jpeg',
-      'tech': ['Python', 'Django', 'SQLite', 'Bootstrap'],
-      'category': 'Web Application',
     },
     {
       'title': 'Corruption Zii',
@@ -92,15 +73,6 @@ class _ProjectsScreenState extends State<ProjectsScreen>
       'image': 'assets/images/music_app.jpeg',
       'tech': ['HTML', 'CSS', 'JavaScript', 'Web Audio API'],
       'category': 'Entertainment',
-    },
-    {
-      'title': 'My Pocket Wallet',
-      'description':
-          'A personal finance management app for tracking expenses, income, and budgeting.',
-      'url': 'https://slozzyondul.github.io/wallet/',
-      'image': 'assets/images/wallet.jpeg',
-      'tech': ['HTML', 'CSS', 'JavaScript', 'Chart.js'],
-      'category': 'Finance',
     },
   ];
 
