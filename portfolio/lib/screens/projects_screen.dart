@@ -20,12 +20,21 @@ class _ProjectsScreenState extends State<ProjectsScreen>
 
   final List<Map<String, dynamic>> projects = [
     {
+      'title': 'Maisha Yangu Organization',
+      'description':
+          'Maisha Yangu Organization empowers children and youth in Kawangware, Nairobi, through comprehensive education, mentorship, and community development programs.',
+      'url': 'https://maishayangu.org/',
+      'image': 'assets/images/maishayangu.jpg',
+      'tech': ['JavaScript', 'Python'],
+      'category': 'Non-Profit Organization',
+    },
+    {
       'title': 'Genjomu Construction',
       'description':
           'A professional corporate website for Genjomu Construction company, featuring their service portfolio, completed projects, and business expertise.',
       'url': 'https://genjomuconstruction.co.ke/',
       'image': 'assets/images/genjomu.png',
-      'tech': ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+      'tech': ['Python', 'JavaScript'],
       'category': 'Business Website',
     },
     {
@@ -34,7 +43,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           'A comprehensive educational platform for Ngando Preparatory Schools, featuring academic program details, character development values, and an interactive donation portal.',
       'url': 'https://ngandopreparatoryschools.org/',
       'image': 'assets/images/ngando_school.png',
-      'tech': ['Python', 'Django', 'Bootstrap', 'JavaScript'],
+      'tech': ['Python', 'JavaScript'],
       'category': 'Education Platform',
     },
     {
@@ -43,7 +52,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           'A digital sanctuary for worship, featuring weekly sessions, Bible study videos, and inspirational spiritual content.',
       'url': 'https://slozzyondul.github.io/devotion/',
       'image': 'assets/images/devotion.png',
-      'tech': ['Flutter', 'Dart', 'GitHub Pages'],
+      'tech': ['Flutter', 'Dart'],
       'category': 'Digital Ministry',
     },
     {
@@ -53,7 +62,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
       'url':
           'https://slozzyondul.github.io/Social_Justice_and_Reform_Hackathon/',
       'image': 'assets/images/corruption_zii.png',
-      'tech': ['HTML', 'CSS', 'JavaScript', 'GitHub Pages'],
+      'tech': ['Flutter', 'Dart'],
       'category': 'Web Platform',
     },
     {
@@ -62,7 +71,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           'An e-commerce platform for pet food and supplies with inventory management and order processing.',
       'url': 'https://slozzyondul.github.io/dog_food/',
       'image': 'assets/images/dog_food.jpeg',
-      'tech': ['HTML', 'CSS', 'JavaScript', 'Local Storage'],
+      'tech': ['Dart', 'Flutter'],
       'category': 'E-commerce',
     },
     {
@@ -71,7 +80,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           'A modern music streaming application with playlist management and audio controls.',
       'url': 'https://slozzyondul.github.io/music-app/',
       'image': 'assets/images/music_app.jpeg',
-      'tech': ['HTML', 'CSS', 'JavaScript', 'Web Audio API'],
+      'tech': ['Dart', 'Flutter'],
       'category': 'Entertainment',
     },
   ];
